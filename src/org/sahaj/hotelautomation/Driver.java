@@ -44,6 +44,8 @@ public class Driver {
                         int subCorridorsPerFloor = Integer.parseInt(input[2].trim());
 
                         hotel = new Hotel(floors, "Westin", mainCorridorsPerFloor, subCorridorsPerFloor);
+
+                        hotel.print();
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println("Input file does not contain input in correct format.");
 

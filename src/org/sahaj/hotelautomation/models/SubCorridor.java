@@ -1,5 +1,6 @@
 package org.sahaj.hotelautomation.models;
 
+import org.sahaj.hotelautomation.constants.Constants;
 import org.sahaj.hotelautomation.constants.CorridorType;
 
 public class SubCorridor extends Corridor {
@@ -13,7 +14,23 @@ public class SubCorridor extends Corridor {
         number = corridorNumber;
     }
 
-    public void printStatus() {
-        System.out.print("Sub Corridor " + number + " Light : " + light.getStatus() + " : AC : " + ac.getStatus());
+    public ElectronicEquipment getLight() {
+        return light;
+    }
+
+    public void setLight(ElectronicEquipment light) {
+        this.light = light;
+    }
+
+    public ElectronicEquipment getAc() {
+        return ac;
+    }
+
+    public void setAc(ElectronicEquipment ac) {
+        this.ac = ac;
+    }
+
+    public void print() {
+        System.out.println("Sub Corridor " + number + " Light : " + (light.getStatus() ? "ON" : "OFF") + " : AC : " + (ac.getStatus() ? Constants.onStatus : Constants.offStatus));
     }
 }

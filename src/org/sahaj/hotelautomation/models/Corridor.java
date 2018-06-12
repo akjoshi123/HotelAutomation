@@ -2,9 +2,10 @@ package org.sahaj.hotelautomation.models;
 
 import org.sahaj.hotelautomation.constants.CorridorType;
 
-public class Corridor {
+public abstract class Corridor {
 
     protected int number;
     protected CorridorType type;
 
+    abstract void print();
 }

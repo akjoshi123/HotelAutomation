@@ -36,6 +36,13 @@ public class Hotel {
         this.floors = floors;
     }
 
+    public void print() {
+
+        for(Floor f: this.getFloors()) {
+            f.print();
+        }
+    }
+
     public void processMovement(int floor, int corridor) {
 
 
