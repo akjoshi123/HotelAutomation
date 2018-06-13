@@ -1,14 +1,19 @@
 package org.sahaj.hotelautomation.models;
 
+import org.sahaj.hotelautomation.constants.Constants;
+
 public class AirConditioner extends ElectronicEquipment{
 
-    private static int powerConsumed = 10;
+    private static int powerConsumed = Constants.powerConsumptionAC;
 
-    public static int getPowerConsumed() {
+    @Override
+    int getPowerConsumption() {
         return powerConsumed;
     }
 
-    public static void setPowerConsumed(int powerConsumed) {
-        AirConditioner.powerConsumed = powerConsumed;
+    @Override
+    void setPowerConsumption(int powerConsumption) {
+        this.powerConsumed = powerConsumption;
+
     }
 }

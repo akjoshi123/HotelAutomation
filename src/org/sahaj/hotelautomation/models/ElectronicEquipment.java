@@ -3,6 +3,7 @@ package org.sahaj.hotelautomation.models;
 public abstract class ElectronicEquipment {
 
     private boolean isOn = true;
+    private int powerConsumption;
 
     void turnOn() {
 
@@ -19,4 +20,8 @@ public abstract class ElectronicEquipment {
     boolean getStatus() {
         return isOn;
     }
+
+    abstract int getPowerConsumption();
+
+    abstract void setPowerConsumption(int powerConsumption);
 }

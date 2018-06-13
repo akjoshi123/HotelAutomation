@@ -2,14 +2,13 @@ package org.sahaj.hotelautomation.models;
 
 import org.sahaj.hotelautomation.constants.Constants;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Floor {
 
     private int floorNumber;
-    private List<Corridor> mainCorridors;
-    private List<Corridor> subCorridors;
+    private HashMap<Integer, Corridor> mainCorridors;
+    private HashMap<Integer, Corridor> subCorridors;
     private int maxAllowedPowerConsumption;
 
     public int getFloorNumber() {
@@ -20,19 +19,19 @@ public class Floor {
         this.floorNumber = floorNumber;
     }
 
-    public List<Corridor> getMainCorridors() {
+    public HashMap<Integer, Corridor> getMainCorridors() {
         return mainCorridors;
     }
 
-    public void setMainCorridors(List<Corridor> mainCorridors) {
+    public void setMainCorridors(HashMap<Integer, Corridor> mainCorridors) {
         this.mainCorridors = mainCorridors;
     }
 
-    public List<Corridor> getSubCorridors() {
+    public HashMap<Integer, Corridor> getSubCorridors() {
         return subCorridors;
     }
 
-    public void setSubCorridors(List<Corridor> subCorridors) {
+    public void setSubCorridors(HashMap<Integer, Corridor> subCorridors) {
         this.subCorridors = subCorridors;
     }
 
@@ -40,45 +39,114 @@ public class Floor {
         this.maxAllowedPowerConsumption = maxAllowedPowerConsumption;
     }
 
-    public int getCurrentPowerComsumption() {
+    public int getMaxAllowedPowerConsumption() {
+        return maxAllowedPowerConsumption;
+    }
+
+    private int getCorridorPowerConsumption(HashMap<Integer, Corridor> corridor) {
+        Iterator<Map.Entry<Integer, Corridor>> itr = corridor.entrySet().iterator();
 
         int consumption = 0;
-        for (Corridor subCorridor: subCorridors) {
-            consumption = consumption + subCorridor.getPowerConsumed();
-        }
-
-        for (Corridor mainCorridor: mainCorridors) {
-            consumption = consumption + mainCorridor.getPowerConsumed();
+        while(itr.hasNext())
+        {
+            Map.Entry<Integer, Corridor> entry = itr.next();
+            consumption = consumption + entry.getValue().getPowerConsumed();
         }
 
         return consumption;
     }
 
+    public int getCurrentPowerComsumption() {
+
+        return getCorridorPowerConsumption(mainCorridors) + getCorridorPowerConsumption(subCorridors);
+    }
+
     public Floor(int floorNumber, int mainCorridor, int subCorridor) {
         this.floorNumber = floorNumber;
-        mainCorridors = new ArrayList<Corridor>();
-        subCorridors = new ArrayList<Corridor>();
+        mainCorridors = new HashMap<Integer, Corridor>();
+        subCorridors = new HashMap<Integer, Corridor>();
 
         for(int i = 1; i <= mainCorridor; i++) {
-            mainCorridors.add(new MainCorridor(i));
+            mainCorridors.put(i, new MainCorridor(i));
         }
 
         for(int j = 1; j <= subCorridor; j++) {
-            subCorridors.add(new SubCorridor(j));
+            subCorridors.put(j, new SubCorridor(j));
         }
 
         setMaxAllowedPowerConsumption(mainCorridor * Constants.powerConsumptionAllowedMaincorridor + subCorridor * Constants.powerConsumptionAllowedSubcorridor);
 
     }
 
+    private void printCorridor(HashMap<Integer, Corridor> corridor) {
+        Iterator<Map.Entry<Integer, Corridor>> itr = corridor.entrySet().iterator();
+
+        while(itr.hasNext())
+        {
+            Map.Entry<Integer, Corridor> entry = itr.next();
+            entry.getValue().print();
+        }
+    }
+
+    public boolean checkLightStatus(int corridorNumber) {
+
+        if(subCorridors.containsKey(corridorNumber)) {
+            Corridor corridor = subCorridors.get(corridorNumber);
+
+            return corridor.getLight().getStatus();
+        } else
+            System.out.println("No such corridor present!!!");
+
+        return false;
+    }
+
+    public void turnOnLight(int corridorNumber) {
+        if(subCorridors.containsKey(corridorNumber)) {
+            Corridor corridor = subCorridors.get(corridorNumber);
+
+            corridor.getLight().turnOn();
+        } else
+            System.out.println("No such corridor present!!!");
+    }
+
+    public void turnOffLight(int corridorNumber) {
+        if(subCorridors.containsKey(corridorNumber)) {
+            Corridor corridor = subCorridors.get(corridorNumber);
+
+            corridor.getLight().turnOff();
+        } else
+            System.out.println("No such corridor present!!!");
+    }
+
     public void print() {
         System.out.println("Floor " + floorNumber);
 
-        for(Corridor mainCorridor: mainCorridors)
-            mainCorridor.print();
+        printCorridor(mainCorridors);
 
-        for(Corridor subCorridor: subCorridors)
-            subCorridor.print();
+        printCorridor(subCorridors);
+
     }
 
+    public boolean switchOffRandomFloorAC(int corridorNumber) {
+
+        Iterator<Map.Entry<Integer, Corridor>> itr = subCorridors.entrySet().iterator();
+
+        while(itr.hasNext())
+        {
+            Map.Entry<Integer, Corridor> entry = itr.next();
+            Corridor corridor = entry.getValue();
+
+            if(entry.getKey() == corridorNumber)
+                continue;
+
+            if(!corridor.getAc().getStatus())
+                continue;
+
+            corridor.getAc().turnOff();
+
+            return true;
+        }
+
+        return false;
+    }
 }

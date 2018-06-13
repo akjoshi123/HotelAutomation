@@ -5,8 +5,6 @@ import org.sahaj.hotelautomation.constants.CorridorType;
 
 public class MainCorridor extends Corridor {
 
-    private ElectronicEquipment light, ac;
-
     public MainCorridor(int corridorNumber) {
         type = CorridorType.Main;
         light = new Lights();
@@ -33,9 +31,9 @@ public class MainCorridor extends Corridor {
 
         int consumption = 0;
         if(ac.getStatus())
-            consumption = consumption + 10;
+            consumption = consumption + ac.getPowerConsumption();
         if(light.getStatus())
-            consumption = consumption + 5;
+            consumption = consumption + light.getPowerConsumption();
 
         return consumption;
     }

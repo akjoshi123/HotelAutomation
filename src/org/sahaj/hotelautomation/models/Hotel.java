@@ -1,19 +1,20 @@
 package org.sahaj.hotelautomation.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.sahaj.hotelautomation.constants.Constants;
+
+import java.util.*;
 
 public class Hotel {
 
     private String hotelName;
-    private List<Floor> floors;
+    private HashMap<Integer, Floor> floors;
 
     public Hotel(int floors, String name, int mainCorridors, int subCorridors) {
 
-        List<Floor> floorObjects = new ArrayList<Floor>();
+        HashMap<Integer, Floor> floorObjects = new HashMap<Integer, Floor>();
 
         for(int i = 1;i <= floors; i++) {
-            floorObjects.add(new Floor(i, mainCorridors, subCorridors));
+            floorObjects.put(i, new Floor(i, mainCorridors, subCorridors));
         }
 
         this.hotelName = name;
@@ -28,23 +29,48 @@ public class Hotel {
         this.hotelName = hotelName;
     }
 
-    public List<Floor> getFloors() {
+    public HashMap<Integer, Floor> getFloors() {
         return floors;
     }
 
-    public void setFloors(List<Floor> floors) {
+    public void setFloors(HashMap<Integer, Floor> floors) {
         this.floors = floors;
     }
 
     public void print() {
 
-        for(Floor f: this.getFloors()) {
-            f.print();
+        Iterator<Map.Entry<Integer, Floor>> itr = floors.entrySet().iterator();
+
+        while(itr.hasNext())
+        {
+            Map.Entry<Integer, Floor> entry = itr.next();
+            entry.getValue().print();
         }
     }
 
-    public void processMovement(int floor, int corridor) {
+    public void processMovement(int floorNumber, int corridorNumber) {
 
+        if(floors.containsKey(floorNumber)) {
+            Floor floor = floors.get(floorNumber);
+
+            if(!floor.checkLightStatus(corridorNumber)) {
+
+                if(floor.getCurrentPowerComsumption() + Constants.powerConsumptionLight > floor.getMaxAllowedPowerConsumption()) {
+                    if(floor.switchOffRandomFloorAC(corridorNumber))
+                        floor.turnOnLight(corridorNumber);
+                    else {
+                        System.out.println("No corridor has lights ON");
+                    }
+
+                }
+            } else {
+                // TODO: Increase timer for that light
+            }
+
+        } else
+            System.out.println("No such floor exists!!!");
+
+        print();
 
     }
 }
