@@ -8,4 +8,5 @@ public abstract class Corridor {
     protected CorridorType type;
 
     abstract void print();
+    abstract int getPowerConsumed();
 }

@@ -12,6 +12,9 @@ public class MainCorridor extends Corridor {
         light = new Lights();
         ac = new AirConditioner();
         number = corridorNumber;
+
+        light.turnOn();
+        ac.turnOn();
     }
 
     public ElectronicEquipment getLight() {
@@ -24,6 +27,17 @@ public class MainCorridor extends Corridor {
 
     public ElectronicEquipment getAc() {
         return ac;
+    }
+
+    public int getPowerConsumed() {
+
+        int consumption = 0;
+        if(ac.getStatus())
+            consumption = consumption + 10;
+        if(light.getStatus())
+            consumption = consumption + 5;
+
+        return consumption;
     }
 
     public void setAc(ElectronicEquipment ac) {

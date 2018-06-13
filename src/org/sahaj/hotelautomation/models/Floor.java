@@ -1,5 +1,7 @@
 package org.sahaj.hotelautomation.models;
 
+import org.sahaj.hotelautomation.constants.Constants;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,7 @@ public class Floor {
     private int floorNumber;
     private List<Corridor> mainCorridors;
     private List<Corridor> subCorridors;
-    private int currentPowerComsumption;
+    private int maxAllowedPowerConsumption;
 
     public int getFloorNumber() {
         return floorNumber;
@@ -34,12 +36,22 @@ public class Floor {
         this.subCorridors = subCorridors;
     }
 
-    public int getCurrentPowerComsumption() {
-        return currentPowerComsumption;
+    public void setMaxAllowedPowerConsumption(int maxAllowedPowerConsumption) {
+        this.maxAllowedPowerConsumption = maxAllowedPowerConsumption;
     }
 
-    public void setCurrentPowerComsumption(int currentPowerComsumption) {
-        this.currentPowerComsumption = currentPowerComsumption;
+    public int getCurrentPowerComsumption() {
+
+        int consumption = 0;
+        for (Corridor subCorridor: subCorridors) {
+            consumption = consumption + subCorridor.getPowerConsumed();
+        }
+
+        for (Corridor mainCorridor: mainCorridors) {
+            consumption = consumption + mainCorridor.getPowerConsumed();
+        }
+
+        return consumption;
     }
 
     public Floor(int floorNumber, int mainCorridor, int subCorridor) {
@@ -54,6 +66,8 @@ public class Floor {
         for(int j = 1; j <= subCorridor; j++) {
             subCorridors.add(new SubCorridor(j));
         }
+
+        setMaxAllowedPowerConsumption(mainCorridor * Constants.powerConsumptionAllowedMaincorridor + subCorridor * Constants.powerConsumptionAllowedSubcorridor);
 
     }
 
