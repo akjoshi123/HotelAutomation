@@ -28,6 +28,6 @@ public class PowerConsumptionLimits implements PowerLimits {
         int subCorridorPowerConsumption = subCorridors.entrySet().stream().mapToInt(x -> x.getValue().getPowerConsumed()).sum();
 
 
-        return (mainCorridorPowerConsumption + subCorridorPowerConsumption) <= getPowerAllowedPerFloor(floor);
+        return (mainCorridorPowerConsumption + subCorridorPowerConsumption + Constants.powerConsumptionLight) <= getPowerAllowedPerFloor(floor);
     }
 }
