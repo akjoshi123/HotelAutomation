@@ -1,8 +1,8 @@
 package org.sahaj.hotelautomation.builder;
 
-import org.sahaj.hotelautomation.models.Corridors.Corridor;
-import org.sahaj.hotelautomation.models.Corridors.MainCorridor;
-import org.sahaj.hotelautomation.models.Corridors.SubCorridor;
+import org.sahaj.hotelautomation.models.corridors.Corridor;
+import org.sahaj.hotelautomation.models.corridors.MainCorridor;
+import org.sahaj.hotelautomation.models.corridors.SubCorridor;
 import org.sahaj.hotelautomation.models.Floor;
 
 import java.util.HashMap;

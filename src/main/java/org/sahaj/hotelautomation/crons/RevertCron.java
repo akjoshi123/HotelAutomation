@@ -3,10 +3,9 @@ package org.sahaj.hotelautomation.crons;
 import org.sahaj.hotelautomation.builder.Hotel;
 import org.sahaj.hotelautomation.constants.Constants;
 import org.sahaj.hotelautomation.controller.PowerController;
-import org.sahaj.hotelautomation.models.Corridors.Corridor;
+import org.sahaj.hotelautomation.models.corridors.Corridor;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.Executors;

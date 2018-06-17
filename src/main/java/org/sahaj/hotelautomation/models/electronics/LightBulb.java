@@ -1,4 +1,4 @@
-package org.sahaj.hotelautomation.models.Electronics;
+package org.sahaj.hotelautomation.models.electronics;
 
 import org.sahaj.hotelautomation.constants.Constants;
 

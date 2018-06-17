@@ -1,6 +1,6 @@
 package org.sahaj.hotelautomation.utils;
 
-import org.sahaj.hotelautomation.models.Corridors.Corridor;
+import org.sahaj.hotelautomation.models.corridors.Corridor;
 
 import java.util.HashMap;
 import java.util.Map;

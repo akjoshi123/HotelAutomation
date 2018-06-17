@@ -1,20 +1,20 @@
-package org.sahaj.hotelautomation.models.Corridors;
+package org.sahaj.hotelautomation.models.corridors;
 
 import org.sahaj.hotelautomation.constants.CorridorType;
 
-public class MainCorridor extends Corridor {
+public class SubCorridor extends Corridor {
 
     private int corridorNumber;
 
-
-    public MainCorridor(int corridorNumber) {
-        super(CorridorType.Main);
+    public SubCorridor(int corridorNumber) {
+        super(CorridorType.Sub);
         this.corridorNumber = corridorNumber;
+
+        this.getLight().turnOff();
     }
 
-
     public void print() {
-        System.out.println("Main Corridor " + corridorNumber);
+        System.out.println("Sub Corridor " + corridorNumber);
 
         this.getAirConditioner().print();
         this.getLight().print();

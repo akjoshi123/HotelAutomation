@@ -1,9 +1,9 @@
-package org.sahaj.hotelautomation.models.Corridors;
+package org.sahaj.hotelautomation.models.corridors;
 
 import org.sahaj.hotelautomation.constants.Constants;
 import org.sahaj.hotelautomation.constants.CorridorType;
-import org.sahaj.hotelautomation.models.Electronics.AirConditioner;
-import org.sahaj.hotelautomation.models.Electronics.LightBulb;
+import org.sahaj.hotelautomation.models.electronics.AirConditioner;
+import org.sahaj.hotelautomation.models.electronics.LightBulb;
 
 public abstract class Corridor {
 

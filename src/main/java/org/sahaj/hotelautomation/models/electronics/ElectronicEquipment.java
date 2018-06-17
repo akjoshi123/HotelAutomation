@@ -1,4 +1,4 @@
-package org.sahaj.hotelautomation.models.Electronics;
+package org.sahaj.hotelautomation.models.electronics;
 
 public abstract class ElectronicEquipment {
 

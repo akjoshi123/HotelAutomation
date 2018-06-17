@@ -1,11 +1,10 @@
 package org.sahaj.hotelautomation.limitations;
 
 import org.sahaj.hotelautomation.constants.Constants;
-import org.sahaj.hotelautomation.models.Corridors.Corridor;
+import org.sahaj.hotelautomation.models.corridors.Corridor;
 import org.sahaj.hotelautomation.models.Floor;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class PowerConsumptionLimits implements PowerLimits {
 

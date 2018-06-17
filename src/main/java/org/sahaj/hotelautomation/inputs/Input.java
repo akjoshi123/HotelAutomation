@@ -1,15 +1,15 @@
 package org.sahaj.hotelautomation.inputs;
 
-import org.sahaj.hotelautomation.models.InitialInput;
-import org.sahaj.hotelautomation.models.MotionInput;
+import org.sahaj.hotelautomation.models.inputs.InitialInput;
+import org.sahaj.hotelautomation.models.inputs.MotionInput;
 
 import java.util.Scanner;
 
 public class Input {
 
     private static final String FLOOR_COUNT_STRING = "Number of floors: ";
-    private static final String MAIN_CORRIDOR_COUNT_STRING = "Main Corridors per floor: ";
-    private static final String SUB_CORRIDOR_COUNT_STRING = "Sub Corridors per floor: ";
+    private static final String MAIN_CORRIDOR_COUNT_STRING = "Main corridors per floor: ";
+    private static final String SUB_CORRIDOR_COUNT_STRING = "Sub corridors per floor: ";
 
     private static final String INVALID_INPUT = "Invalid input: ";
 

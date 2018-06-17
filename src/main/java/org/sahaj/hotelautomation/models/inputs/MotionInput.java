@@ -1,4 +1,4 @@
-package org.sahaj.hotelautomation.models;
+package org.sahaj.hotelautomation.models.inputs;
 
 public class MotionInput {
 
