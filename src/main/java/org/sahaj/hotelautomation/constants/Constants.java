@@ -11,4 +11,9 @@ public class Constants {
     public static int powerConsumptionAC = 10;
     public static int powerConsumptionLight = 5;
 
+    public static int cronInterval = 5;
+    public static int cronThreads = 1;
+
+    public static int lightOnInterval = 1;
+
 }

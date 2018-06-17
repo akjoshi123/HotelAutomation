@@ -2,6 +2,7 @@ package org.sahaj.hotelautomation;
 
 import org.sahaj.hotelautomation.builder.Hotel;
 import org.sahaj.hotelautomation.controller.PowerController;
+import org.sahaj.hotelautomation.crons.RevertCron;
 import org.sahaj.hotelautomation.models.Motion;
 
 import java.io.*;
@@ -55,9 +56,13 @@ public class Driver {
 
                     }
                 } else {
+
+
                     String[] input = line.split(",");
                     p = new PowerController(hotel);
                     m.addObserver(p);
+
+                    RevertCron rc = new RevertCron(p, hotel);
 
                     try {
                         int floors = Integer.parseInt(input[0].trim());

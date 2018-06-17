@@ -58,11 +58,10 @@ public class PowerController implements Observer {
             if(!limit.isWithinLimit(floor)) {
                 Corridor alternateSubCorridor = PowerUtils.findRandomCorridor(subCorridor, floor.getSubCorridors(), motion.getSubCorridorNumber());
                 alternateSubCorridor.getAirConditioner().turnOff();
-
                 corridorMapping.put(subCorridor, alternateSubCorridor);
             }
         }
-        
+
         subCorridor.getLight().turnOn();
         light.setLastOnTime(System.currentTimeMillis());
 
