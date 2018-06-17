@@ -30,7 +30,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.sahaj.assignment.HotelAutomationControllerApp</mainClass>
+                            <mainClass>org.sahaj.hotelautomation.HotelAutomationDriver</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

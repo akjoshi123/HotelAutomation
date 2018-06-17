@@ -8,14 +8,14 @@ import org.sahaj.hotelautomation.models.inputs.InitialInput;
 import org.sahaj.hotelautomation.models.Motion;
 import org.sahaj.hotelautomation.models.inputs.MotionInput;
 
-public class HomeAutomationDriver {
+public class HotelAutomationDriver {
 
     private Hotel hotel = null;
 
     public static void main(String args[]) {
 
-        HomeAutomationDriver homeAutomationDriver = new HomeAutomationDriver();
-        homeAutomationDriver.acceptInput();
+        HotelAutomationDriver hotelAutomationDriver = new HotelAutomationDriver();
+        hotelAutomationDriver.acceptInput();
     }
 
     private void acceptInput() {
