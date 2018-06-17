@@ -3,38 +3,43 @@ package org.sahaj.hotelautomation.models;
 import org.sahaj.hotelautomation.constants.Constants;
 import org.sahaj.hotelautomation.constants.CorridorType;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class Corridor {
 
-    protected int number;
     protected CorridorType type;
 
-    protected List<LightBulb> lightBulbs;
-    protected List<AirConditioner> airConditioners;
+    protected LightBulb lightBulb;
+    protected AirConditioner airConditioner;
 
     private static int powerConsumedLight = Constants.powerConsumptionLight;
     private static int powerConsumedAc = Constants.powerConsumptionAC;
 
 
-    public List<LightBulb> getLights() {
-        return lightBulbs;
+    public LightBulb getLight() {
+        return lightBulb;
     }
 
-    public List<AirConditioner> getAirConditioners() {
-        return airConditioners;
+    public AirConditioner getAirConditioner() {
+        return airConditioner;
     }
 
     public Corridor(CorridorType type) {
-        lightBulbs = new ArrayList<LightBulb>();
-        lightBulbs.add(new LightBulb(lightBulbs.size(), powerConsumedLight));
+        lightBulb = new LightBulb( powerConsumedLight);
 
-        airConditioners = new ArrayList<AirConditioner>();
-        airConditioners.add(new AirConditioner(airConditioners.size(), powerConsumedAc));
+        airConditioner = new AirConditioner(powerConsumedAc);
 
         this.type = type;
 
+    }
+
+    public int getPowerConsumed() {
+
+        AirConditioner airConditioner = this.getAirConditioner();
+        LightBulb lightBulb = this.getLight();
+
+        int sumOfAirConditionersPower = airConditioner.getOnStatus() ? airConditioner.getPowerConsumed() : 0;
+        int sumOfAirLightsPower = lightBulb.getOnStatus() ? lightBulb.getPowerConsumed() : 0;;
+
+        return sumOfAirConditionersPower + sumOfAirLightsPower;
     }
 
     abstract void print();

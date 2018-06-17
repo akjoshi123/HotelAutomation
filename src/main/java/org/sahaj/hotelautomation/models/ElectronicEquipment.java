@@ -2,31 +2,31 @@ package org.sahaj.hotelautomation.models;
 
 public abstract class ElectronicEquipment {
 
-    public boolean isOn = true;
-    public int powerConsumed;
+    protected boolean onStatus = true;
+    protected int powerConsumed;
 
     void turnOn() {
 
-        if(!isOn)
-            isOn = true;
+        if(!onStatus)
+            onStatus = true;
     }
 
     void turnOff() {
 
-        if(isOn)
-            isOn = false;
+        if(onStatus)
+            onStatus = false;
     }
 
     boolean getStatus() {
-        return isOn;
+        return onStatus;
     }
 
-    public boolean isOn() {
-        return isOn;
+    public boolean getOnStatus() {
+        return onStatus;
     }
 
-    public void setOn(boolean on) {
-        isOn = on;
+    public void setOnStatus(boolean onStatus) {
+        this.onStatus = onStatus;
     }
 
     public int getPowerConsumed() {
