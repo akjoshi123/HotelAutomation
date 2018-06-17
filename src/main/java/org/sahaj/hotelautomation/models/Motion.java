@@ -18,6 +18,8 @@ public class Motion extends Observable {
 
     public void setFloorNumber(int floorNumber) {
         this.floorNumber = floorNumber;
+        setChanged();
+        notifyObservers();
     }
 
     public int getSubCorridorNumber() {
@@ -26,6 +28,8 @@ public class Motion extends Observable {
 
     public void setSubCorridorNumber(int subCorridorNumber) {
         this.subCorridorNumber = subCorridorNumber;
+        setChanged();
+        notifyObservers();
     }
 
     @Override

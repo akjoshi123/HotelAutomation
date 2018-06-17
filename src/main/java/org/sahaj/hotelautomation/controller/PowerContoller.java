@@ -16,6 +16,7 @@ public class PowerContoller implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        System.out.println("ERERE");
         Motion motion = (Motion) o;
 
         motion.toString();

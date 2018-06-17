@@ -1,6 +1,7 @@
 package org.sahaj.hotelautomation;
 
 import org.sahaj.hotelautomation.builder.Hotel;
+import org.sahaj.hotelautomation.controller.PowerContoller;
 import org.sahaj.hotelautomation.models.HotelNotNeeded;
 import org.sahaj.hotelautomation.models.Motion;
 
@@ -58,6 +59,8 @@ public class Driver {
                         int corridor = Integer.parseInt(input[1].trim());
 
                         Motion m = new Motion(floors, corridor);
+                        PowerContoller p = new PowerContoller(null);
+                        m.addObserver(p);
                         //hotel.processMovement(floors, corridor);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println("Input file does not contain input in correct format.");
