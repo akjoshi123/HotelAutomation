@@ -13,5 +13,11 @@ public class SubCorridor extends Corridor {
 
     public void print() {
         System.out.println("Sub Corridor " + corridorNumber);
+
+        this.getAirConditioner().print();
+        this.getLight().print();
+
+        System.out.println();
+
     }
 }

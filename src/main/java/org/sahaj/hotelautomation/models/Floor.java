@@ -64,20 +64,20 @@ public class Floor {
         return getCorridorPowerConsumption(mainCorridors) + getCorridorPowerConsumption(subCorridors);
     }
 
-    public Floor(int floorNumber, int mainCorridor, int subCorridor) {
+    public Floor(int floorNumber) {
         this.floorNumber = floorNumber;
-        mainCorridors = new HashMap<Integer, Corridor>();
-        subCorridors = new HashMap<Integer, Corridor>();
+//        mainCorridors = new HashMap<Integer, Corridor>();
+//        subCorridors = new HashMap<Integer, Corridor>();
+//
+//        for(int i = 1; i <= mainCorridor; i++) {
+//            mainCorridors.put(i, new MainCorridor(i));
+//        }
+//
+//        for(int j = 1; j <= subCorridor; j++) {
+//            subCorridors.put(j, new SubCorridor(j));
+//        }
 
-        for(int i = 1; i <= mainCorridor; i++) {
-            mainCorridors.put(i, new MainCorridor(i));
-        }
-
-        for(int j = 1; j <= subCorridor; j++) {
-            subCorridors.put(j, new SubCorridor(j));
-        }
-
-        setMaxAllowedPowerConsumption(mainCorridor * Constants.powerConsumptionAllowedMaincorridor + subCorridor * Constants.powerConsumptionAllowedSubcorridor);
+  //      setMaxAllowedPowerConsumption(mainCorridor * Constants.powerConsumptionAllowedMaincorridor + subCorridor * Constants.powerConsumptionAllowedSubcorridor);
 
     }
 
@@ -127,6 +127,8 @@ public class Floor {
         printCorridor(mainCorridors);
 
         printCorridor(subCorridors);
+
+        System.out.println();
 
     }
 

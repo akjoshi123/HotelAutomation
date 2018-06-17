@@ -15,5 +15,11 @@ public class MainCorridor extends Corridor {
 
     public void print() {
         System.out.println("Main Corridor " + corridorNumber);
+
+        this.getAirConditioner().print();
+        this.getLight().print();
+
+        System.out.println();
+
     }
 }

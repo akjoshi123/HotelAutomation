@@ -1,11 +1,10 @@
 package org.sahaj.hotelautomation;
 
-import org.sahaj.hotelautomation.models.Floor;
-import org.sahaj.hotelautomation.models.Hotel;
+import org.sahaj.hotelautomation.builder.Hotel;
+import org.sahaj.hotelautomation.models.HotelNotNeeded;
+import org.sahaj.hotelautomation.models.Motion;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Driver {
 
@@ -43,7 +42,8 @@ public class Driver {
                         int mainCorridorsPerFloor = Integer.parseInt(input[1].trim());
                         int subCorridorsPerFloor = Integer.parseInt(input[2].trim());
 
-                        hotel = new Hotel(floors, "Westin", mainCorridorsPerFloor, subCorridorsPerFloor);
+                        hotel = new Hotel.HotelBuilder("Westin").addFloor(floors).addMainCorridor(mainCorridorsPerFloor).addSubCorridor(subCorridorsPerFloor).build();
+
 
                         hotel.print();
                     } catch (ArrayIndexOutOfBoundsException e) {
@@ -57,7 +57,8 @@ public class Driver {
                         int floors = Integer.parseInt(input[0].trim());
                         int corridor = Integer.parseInt(input[1].trim());
 
-                        hotel.processMovement(floors, corridor);
+                        Motion m = new Motion(floors, corridor);
+                        //hotel.processMovement(floors, corridor);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println("Input file does not contain input in correct format.");
 

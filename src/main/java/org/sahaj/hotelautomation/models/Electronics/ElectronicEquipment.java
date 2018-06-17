@@ -36,4 +36,6 @@ public abstract class ElectronicEquipment {
     public void setPowerConsumed(int powerConsumed) {
         this.powerConsumed = powerConsumed;
     }
+
+    public abstract void print();
 }

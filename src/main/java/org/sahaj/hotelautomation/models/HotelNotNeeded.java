@@ -4,17 +4,17 @@ import org.sahaj.hotelautomation.constants.Constants;
 
 import java.util.*;
 
-public class Hotel {
+public class HotelNotNeeded {
 
     private String hotelName;
     private HashMap<Integer, Floor> floors;
 
-    public Hotel(int floors, String name, int mainCorridors, int subCorridors) {
+    public HotelNotNeeded(int floors, String name, int mainCorridors, int subCorridors) {
 
         HashMap<Integer, Floor> floorObjects = new HashMap<Integer, Floor>();
 
         for(int i = 1;i <= floors; i++) {
-            floorObjects.put(i, new Floor(i, mainCorridors, subCorridors));
+            floorObjects.put(i, new Floor(i));
         }
 
         this.hotelName = name;
