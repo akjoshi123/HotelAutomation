@@ -1,6 +1,5 @@
-package org.sahaj.hotelautomation.models;
+package org.sahaj.hotelautomation.models.Corridors;
 
-import org.sahaj.hotelautomation.constants.Constants;
 import org.sahaj.hotelautomation.constants.CorridorType;
 
 public class MainCorridor extends Corridor {

@@ -1,6 +1,9 @@
 package org.sahaj.hotelautomation.models;
 
 import org.sahaj.hotelautomation.constants.Constants;
+import org.sahaj.hotelautomation.models.Corridors.Corridor;
+import org.sahaj.hotelautomation.models.Corridors.MainCorridor;
+import org.sahaj.hotelautomation.models.Corridors.SubCorridor;
 
 import java.util.*;
 

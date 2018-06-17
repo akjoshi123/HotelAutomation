@@ -1,7 +1,9 @@
-package org.sahaj.hotelautomation.models;
+package org.sahaj.hotelautomation.models.Corridors;
 
 import org.sahaj.hotelautomation.constants.Constants;
 import org.sahaj.hotelautomation.constants.CorridorType;
+import org.sahaj.hotelautomation.models.Electronics.AirConditioner;
+import org.sahaj.hotelautomation.models.Electronics.LightBulb;
 
 public abstract class Corridor {
 
@@ -42,5 +44,5 @@ public abstract class Corridor {
         return sumOfAirConditionersPower + sumOfAirLightsPower;
     }
 
-    abstract void print();
+    public abstract void print();
 }
