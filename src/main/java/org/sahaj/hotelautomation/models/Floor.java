@@ -93,7 +93,7 @@ public class Floor {
         if(subCorridors.containsKey(corridorNumber)) {
             Corridor corridor = subCorridors.get(corridorNumber);
 
-            return corridor.getLight().getStatus();
+            return corridor.getLights().getStatus();
         } else
             System.out.println("No such corridor present!!!");
 
@@ -104,7 +104,7 @@ public class Floor {
         if(subCorridors.containsKey(corridorNumber)) {
             Corridor corridor = subCorridors.get(corridorNumber);
 
-            corridor.getLight().turnOn();
+            corridor.getLights().turnOn();
         } else
             System.out.println("No such corridor present!!!");
     }
@@ -113,7 +113,7 @@ public class Floor {
         if(subCorridors.containsKey(corridorNumber)) {
             Corridor corridor = subCorridors.get(corridorNumber);
 
-            corridor.getLight().turnOff();
+            corridor.getLights().turnOff();
         } else
             System.out.println("No such corridor present!!!");
     }
@@ -139,10 +139,10 @@ public class Floor {
             if(entry.getKey() == corridorNumber)
                 continue;
 
-            if(!corridor.getAc().getStatus())
+            if(!corridor.getAirConditioners().getStatus())
                 continue;
 
-            corridor.getAc().turnOff();
+            corridor.getAirConditioners().turnOff();
 
             return true;
         }
