@@ -38,8 +38,8 @@ public abstract class Corridor {
         AirConditioner airConditioner = this.getAirConditioner();
         LightBulb lightBulb = this.getLight();
 
-        int sumOfAirConditionersPower = airConditioner.getOnStatus() ? airConditioner.getPowerConsumed() : 0;
-        int sumOfAirLightsPower = lightBulb.getOnStatus() ? lightBulb.getPowerConsumed() : 0;;
+        int sumOfAirConditionersPower = airConditioner.getStatus() ? airConditioner.getPowerConsumed() : 0;
+        int sumOfAirLightsPower = lightBulb.getStatus() ? lightBulb.getPowerConsumed() : 0;;
 
         return sumOfAirConditionersPower + sumOfAirLightsPower;
     }

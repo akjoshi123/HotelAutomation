@@ -1,6 +1,7 @@
 package org.sahaj.hotelautomation.models;
 
 import java.util.Observable;
+import java.util.Observer;
 
 public class Motion extends Observable {
 
@@ -10,6 +11,13 @@ public class Motion extends Observable {
     public Motion(int floorNumber, int subCorridorNumber) {
         this.floorNumber = floorNumber;
         this.subCorridorNumber = subCorridorNumber;
+
+        setChanged();
+        notifyObservers();
+    }
+
+    public Motion() {
+
     }
 
     public int getFloorNumber() {
@@ -18,8 +26,12 @@ public class Motion extends Observable {
 
     public void setFloorNumber(int floorNumber) {
         this.floorNumber = floorNumber;
+    }
+
+    @Override
+    public void notifyObservers(Object object) {
         setChanged();
-        notifyObservers();
+        super.notifyObservers(object);
     }
 
     public int getSubCorridorNumber() {
@@ -28,8 +40,6 @@ public class Motion extends Observable {
 
     public void setSubCorridorNumber(int subCorridorNumber) {
         this.subCorridorNumber = subCorridorNumber;
-        setChanged();
-        notifyObservers();
     }
 
     @Override

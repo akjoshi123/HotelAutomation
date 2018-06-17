@@ -47,30 +47,30 @@ public class HotelNotNeeded {
             entry.getValue().print();
         }
     }
-
-    public void processMovement(int floorNumber, int corridorNumber) {
-
-        if(floors.containsKey(floorNumber)) {
-            Floor floor = floors.get(floorNumber);
-
-            if(!floor.checkLightStatus(corridorNumber)) {
-
-                if(floor.getCurrentPowerComsumption() + Constants.powerConsumptionLight > floor.getMaxAllowedPowerConsumption()) {
-                    if(floor.switchOffRandomFloorAC(corridorNumber))
-                        floor.turnOnLight(corridorNumber);
-                    else {
-                        System.out.println("No corridor has lights ON");
-                    }
-
-                }
-            } else {
-                // TODO: Increase timer for that light
-            }
-
-        } else
-            System.out.println("No such floor exists!!!");
-
-        print();
-
-    }
+//
+//    public void processMovement(int floorNumber, int corridorNumber) {
+//
+//        if(floors.containsKey(floorNumber)) {
+//            Floor floor = floors.get(floorNumber);
+//
+//            if(!floor.checkLightStatus(corridorNumber)) {
+//
+//                if(floor.getCurrentPowerComsumption() + Constants.powerConsumptionLight > floor.getMaxAllowedPowerConsumption()) {
+//                    if(floor.switchOffRandomFloorAC(corridorNumber))
+//                        floor.turnOnLight(corridorNumber);
+//                    else {
+//                        System.out.println("No corridor has lights ON");
+//                    }
+//
+//                }
+//            } else {
+//                // TODO: Increase timer for that light
+//            }
+//
+//        } else
+//            System.out.println("No such floor exists!!!");
+//
+//        print();
+//
+//    }
 }

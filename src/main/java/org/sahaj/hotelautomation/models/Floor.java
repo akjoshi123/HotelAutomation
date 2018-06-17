@@ -45,27 +45,30 @@ public class Floor {
     public int getMaxAllowedPowerConsumption() {
         return maxAllowedPowerConsumption;
     }
-
-    private int getCorridorPowerConsumption(HashMap<Integer, Corridor> corridor) {
-        Iterator<Map.Entry<Integer, Corridor>> itr = corridor.entrySet().iterator();
-
-        int consumption = 0;
-        while(itr.hasNext())
-        {
-            Map.Entry<Integer, Corridor> entry = itr.next();
-            consumption = consumption + entry.getValue().getPowerConsumed();
-        }
-
-        return consumption;
-    }
-
-    public int getCurrentPowerComsumption() {
-
-        return getCorridorPowerConsumption(mainCorridors) + getCorridorPowerConsumption(subCorridors);
-    }
+//
+//    private int getCorridorPowerConsumption(HashMap<Integer, Corridor> corridor) {
+//        Iterator<Map.Entry<Integer, Corridor>> itr = corridor.entrySet().iterator();
+//
+//        int consumption = 0;
+//        while(itr.hasNext())
+//        {
+//            Map.Entry<Integer, Corridor> entry = itr.next();
+//            consumption = consumption + entry.getValue().getPowerConsumed();
+//        }
+//
+//        return consumption;
+//    }
+//
+//    public int getCurrentPowerComsumption() {
+//
+//        return getCorridorPowerConsumption(mainCorridors) + getCorridorPowerConsumption(subCorridors);
+//    }
 
     public Floor(int floorNumber) {
         this.floorNumber = floorNumber;
+//        int mainCorridorSize = this.getMainCorridors().size();
+//        int subCorridorSize = this.getSubCorridors().size();
+
 //        mainCorridors = new HashMap<Integer, Corridor>();
 //        subCorridors = new HashMap<Integer, Corridor>();
 //
@@ -77,8 +80,7 @@ public class Floor {
 //            subCorridors.put(j, new SubCorridor(j));
 //        }
 
-  //      setMaxAllowedPowerConsumption(mainCorridor * Constants.powerConsumptionAllowedMaincorridor + subCorridor * Constants.powerConsumptionAllowedSubcorridor);
-
+//        this.maxAllowedPowerConsumption = mainCorridorSize * Constants.powerConsumptionAllowedMaincorridor + subCorridorSize * Constants.powerConsumptionAllowedSubcorridor;
     }
 
     private void printCorridor(HashMap<Integer, Corridor> corridor) {

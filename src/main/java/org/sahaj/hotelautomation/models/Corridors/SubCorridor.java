@@ -9,6 +9,8 @@ public class SubCorridor extends Corridor {
     public SubCorridor(int corridorNumber) {
         super(CorridorType.Sub);
         this.corridorNumber = corridorNumber;
+
+        this.getLight().turnOff();
     }
 
     public void print() {

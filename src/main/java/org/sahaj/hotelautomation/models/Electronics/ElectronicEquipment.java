@@ -21,10 +21,6 @@ public abstract class ElectronicEquipment {
         return onStatus;
     }
 
-    public boolean getOnStatus() {
-        return onStatus;
-    }
-
     public void setOnStatus(boolean onStatus) {
         this.onStatus = onStatus;
     }
