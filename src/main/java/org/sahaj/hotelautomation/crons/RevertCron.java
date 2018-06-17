@@ -49,7 +49,9 @@ public class RevertCron {
                 if(diffMinutes >= Constants.lightOnInterval) {
 
                     corridor.getLight().turnOff();
-                    corridorAlternate.getAirConditioner().turnOn();
+                    if(corridorAlternate != null)
+                        corridorAlternate.getAirConditioner().turnOn();
+
                     itr.remove();
 
                     hotel.print();
