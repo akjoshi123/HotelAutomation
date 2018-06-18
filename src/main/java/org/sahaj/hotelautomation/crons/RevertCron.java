@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class RevertCron {
 
     private static ScheduledExecutorService scheduledExecutorService = Executors
-            .newScheduledThreadPool(1);
+            .newScheduledThreadPool(Constants.cronThreads);
     private static final long CRON_INTERVAL = Constants.cronInterval;
     private PowerController powerController;
     private Hotel hotel;
@@ -33,7 +33,7 @@ public class RevertCron {
         scheduledExecutorService.scheduleAtFixedRate(() -> {
 
             Iterator<Map.Entry<Corridor, Corridor>> itr = this.powerController.getCorridorMapping().entrySet().iterator();
-
+            boolean hasChanged = false;
             while (itr.hasNext()) {
                 Map.Entry<Corridor, Corridor> entry = itr.next();
 
@@ -47,16 +47,18 @@ public class RevertCron {
                 long diffMinutes = diff / (60 * 1000) % 60;
 
                 if(diffMinutes >= Constants.lightOnInterval) {
+                    hasChanged = true;
 
                     corridor.getLight().turnOff();
                     if(corridorAlternate != null)
                         corridorAlternate.getAirConditioner().turnOn();
 
                     itr.remove();
-
-                    hotel.print();
                 }
             }
+
+            if(hasChanged)
+                hotel.print();
 
         }, 0, CRON_INTERVAL, TimeUnit.SECONDS);
     }
