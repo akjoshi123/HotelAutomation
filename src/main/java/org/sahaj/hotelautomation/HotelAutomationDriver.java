@@ -1,6 +1,7 @@
 package org.sahaj.hotelautomation;
 
 import org.sahaj.hotelautomation.builder.Hotel;
+import org.sahaj.hotelautomation.controller.MotionController;
 import org.sahaj.hotelautomation.controller.PowerController;
 import org.sahaj.hotelautomation.crons.RevertCron;
 import org.sahaj.hotelautomation.inputs.Input;
@@ -20,9 +21,8 @@ public class HotelAutomationDriver {
 
     private void acceptInput() {
 
-        Motion m = new Motion();
-        PowerController p;
-
+        Motion motion = new Motion();
+        PowerController powerController;
 
         try {
             InitialInput hotelState = Input.getInitialInput();
@@ -31,35 +31,60 @@ public class HotelAutomationDriver {
             int mainCorridorsPerFloor = hotelState.getMainCorridorCount();
             int subCorridorsPerFloor = hotelState.getSubCorridorCount();
 
+            if (!validInitialInput(hotelState)) {
+                System.err.println("Initial Input i.e. count of Floor , Maincorridor and Subcorridor must be atleast 1.");
+                return;
+            }
+
             hotel = new Hotel.HotelBuilder("Westin").addFloor(floorCount).addMainCorridor(mainCorridorsPerFloor).addSubCorridor(subCorridorsPerFloor).build();
-
-
             hotel.print();
 
-            p = new PowerController(hotel);
-            m.addObserver(p);
-            RevertCron rc = new RevertCron(p, hotel);
+            powerController = new PowerController(hotel);
+            MotionController motionController = new MotionController(motion, powerController);
+
+            RevertCron rc = new RevertCron(powerController, hotel);
 
             while (true) {
                 MotionInput motionInput = Input.getMotionInput();
 
-                try {
-                    int floorNumber = motionInput.getFloor();
-                    int corridor = motionInput.getSubCorridor();
 
-                    m.setFloorNumber(floorNumber);
-                    m.setSubCorridorNumber(corridor);
-
-                    m.notifyObservers();
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Input file does not contain input in correct format.");
-
+                if (!validInput(motionInput)) {
+                    System.err.println("Input floor/subcorridor is not in expected range");
+                    continue;
                 }
+                int floorNumber = motionInput.getFloor();
+                int corridor = motionInput.getSubCorridor();
+                motion.setFloorNumber(floorNumber);
+                motion.setSubCorridorNumber(corridor);
+
+                motionController.publishMotionEvent();
             }
         } catch (Exception ex) {
             ex.getStackTrace();
             System.out.println(ex.getMessage());
         }
+    }
+
+    private boolean validInitialInput(InitialInput hotelState) {
+        int floorCount = hotelState.getFloor();
+        int mainCorridorsPerFloor = hotelState.getMainCorridorCount();
+        int subCorridorsPerFloor = hotelState.getSubCorridorCount();
+
+        if (floorCount <= 0 || mainCorridorsPerFloor <= 0 || subCorridorsPerFloor <= 0)
+            return false;
+
+        return true;
+    }
+
+    private boolean validInput(MotionInput motionInput) {
+
+        if (hotel.getFloors().size() < motionInput.getFloor())
+            return false;
+
+        if (hotel.getFloors().get(1).getSubCorridors().size() < motionInput.getSubCorridor())
+            return false;
+
+        return true;
     }
 
 }

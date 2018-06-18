@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class RevertCron {
 
     private static ScheduledExecutorService scheduledExecutorService = Executors
-            .newScheduledThreadPool(1);
+            .newScheduledThreadPool(Constants.cronThreads);
     private static final long CRON_INTERVAL = Constants.cronInterval;
     private PowerController powerController;
     private Hotel hotel;
