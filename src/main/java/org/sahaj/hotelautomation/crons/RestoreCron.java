@@ -16,7 +16,7 @@ public class RestoreCron {
 
     private static ScheduledExecutorService scheduledExecutorService = Executors
             .newScheduledThreadPool(Constants.cronThreads);
-    private static final long CRON_INTERVAL = Constants.cronInterval;
+    private static final long CRON_INTERVAL = Constants.cronIntervalSeconds;
     private PowerController powerController;
     private Hotel hotel;
 
@@ -46,7 +46,7 @@ public class RestoreCron {
                 long diff = currentTime.getTime() - lastTime.getTime();
                 long diffMinutes = diff / (60 * 1000) % 60;
 
-                if(diffMinutes >= Constants.lightOnInterval) {
+                if(diffMinutes >= Constants.lightOnIntervalMinutes) {
                     hasChanged = true;
 
                     corridor.getLight().turnOff();

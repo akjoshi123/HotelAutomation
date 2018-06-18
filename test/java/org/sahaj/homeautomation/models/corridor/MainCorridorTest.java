@@ -1,6 +1,7 @@
 package org.sahaj.homeautomation.models.corridor;
 
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.sahaj.hotelautomation.models.corridors.Corridor;
@@ -29,5 +30,11 @@ public class MainCorridorTest {
 
         corridor.getAirConditioner().turnOff();
         assertEquals(corridor.getPowerConsumed(), 5);
+    }
+
+    @After
+    public void terminate() {
+        // Should kill hotel object in GC
+        corridor = null;
     }
 }

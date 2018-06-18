@@ -1,6 +1,7 @@
 package org.sahaj.homeautomation.inputs;
 
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -67,6 +68,12 @@ public class InputTest {
 
         assertEquals(11, motionInput.getFloor());
         assertEquals(22, motionInput.getSubCorridor());
+    }
+
+    @After
+    public void terminate() {
+        // Should kill hotel object in GC
+        builder = null;
     }
 
 }

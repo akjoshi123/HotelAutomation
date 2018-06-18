@@ -17,10 +17,13 @@ public class PowerConsumptionLimitsTest {
 
     private static Hotel hotel;
     private PowerLimits powerLimits;
+    private static int floorCount = 2;
+    private static int mainCorridorCount = 2;
+    private static int subCorridorCount = 3;
 
     @Before
     public void initialize() {
-        hotel = new Hotel.HotelBuilder("Westin").addFloor(2).addMainCorridor(2).addSubCorridor(3).build();
+        hotel = new Hotel.HotelBuilder("Westin").addFloor(floorCount).addMainCorridor(mainCorridorCount).addSubCorridor(subCorridorCount).build();
         powerLimits = new PowerConsumptionLimits();
     }
 

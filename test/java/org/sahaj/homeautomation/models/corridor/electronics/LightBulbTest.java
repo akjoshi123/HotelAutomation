@@ -1,6 +1,7 @@
 package org.sahaj.homeautomation.models.corridor.electronics;
 
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.sahaj.hotelautomation.models.electronics.LightBulb;
@@ -26,5 +27,11 @@ public class LightBulbTest {
         lightBulb.turnOff();
         assertFalse(lightBulb.getStatus());
 
+    }
+
+    @After
+    public void terminate() {
+        // Should kill hotel object in GC
+        lightBulb = null;
     }
 }
