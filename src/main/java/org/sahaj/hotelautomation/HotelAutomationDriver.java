@@ -3,7 +3,7 @@ package org.sahaj.hotelautomation;
 import org.sahaj.hotelautomation.builder.Hotel;
 import org.sahaj.hotelautomation.controller.MotionController;
 import org.sahaj.hotelautomation.controller.PowerController;
-import org.sahaj.hotelautomation.crons.RevertCron;
+import org.sahaj.hotelautomation.crons.RestoreCron;
 import org.sahaj.hotelautomation.inputs.Input;
 import org.sahaj.hotelautomation.models.inputs.InitialInput;
 import org.sahaj.hotelautomation.models.Motion;
@@ -42,7 +42,7 @@ public class HotelAutomationDriver {
             powerController = new PowerController(hotel);
             MotionController motionController = new MotionController(motion, powerController);
 
-            RevertCron rc = new RevertCron(powerController, hotel);
+            RestoreCron rc = new RestoreCron(powerController, hotel);
 
             while (true) {
                 MotionInput motionInput = Input.getMotionInput();

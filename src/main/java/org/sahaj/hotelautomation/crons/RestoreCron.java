@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class RevertCron {
+public class RestoreCron {
 
     private static ScheduledExecutorService scheduledExecutorService = Executors
             .newScheduledThreadPool(Constants.cronThreads);
@@ -20,7 +20,7 @@ public class RevertCron {
     private PowerController powerController;
     private Hotel hotel;
 
-    public RevertCron(PowerController powerController, Hotel hotel) {
+    public RestoreCron(PowerController powerController, Hotel hotel) {
 
         this.powerController = powerController;
         this.hotel = hotel;

@@ -38,7 +38,7 @@ public class PowerConsumptionLimitsTest {
         int corridorNumber = 1;
         Floor firstFloor = hotel.getFloors().get(corridorNumber);
 
-        assertEquals(powerLimits.getPowerAllowedPerFloor(firstFloor), 60);
+        assertEquals(60, powerLimits.getPowerAllowedPerFloor(firstFloor));
     }
 
     @Test

@@ -5,7 +5,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.sahaj.hotelautomation.builder.Hotel;
-import org.sahaj.hotelautomation.limitations.PowerConsumptionLimits;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
@@ -33,7 +32,7 @@ public class HotelBuilderTest {
 
         Hotel hotel = hotelBuilder.addFloor(floorCount).build();
 
-        assertEquals(hotel.getFloors().size() , floorCount);
+        assertEquals(floorCount, hotel.getFloors().size());
     }
 
     @Test
@@ -42,7 +41,7 @@ public class HotelBuilderTest {
 
         Hotel hotel = hotelBuilder.addFloor(1).addMainCorridor(mainCorridor).build();
 
-        assertEquals(hotel.getFloors().get(1).getMainCorridors().size() , mainCorridor);
+        assertEquals(mainCorridor, hotel.getFloors().get(1).getMainCorridors().size());
     }
 
     @Test
@@ -51,7 +50,7 @@ public class HotelBuilderTest {
 
         Hotel hotel = hotelBuilder.addFloor(1).addSubCorridor(subCorridor).build();
 
-        assertEquals(hotel.getFloors().get(1).getSubCorridors().size() , subCorridor);
+        assertEquals(subCorridor, hotel.getFloors().get(1).getSubCorridors().size());
     }
 
 
@@ -63,8 +62,8 @@ public class HotelBuilderTest {
 
         Hotel hotel = hotelBuilder.addFloor(1).addMainCorridor(mainCorridor).addSubCorridor(subCorridor).build();
 
-        assertEquals(hotel.getFloors().get(1).getSubCorridors().size() , subCorridor);
-        assertEquals(hotel.getFloors().get(1).getMainCorridors().size() , mainCorridor);
+        assertEquals(subCorridor, hotel.getFloors().get(1).getSubCorridors().size());
+        assertEquals(mainCorridor, hotel.getFloors().get(1).getMainCorridors().size());
     }
 
     @Test
@@ -78,7 +77,7 @@ public class HotelBuilderTest {
     public void hotelNameTest() {
         Hotel hotel = hotelBuilder.build();
 
-        assertEquals(hotel.getHotelName(), hotelName);
+        assertEquals(hotelName, hotel.getHotelName());
 
     }
 }
