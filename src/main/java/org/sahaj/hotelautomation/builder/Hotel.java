@@ -40,8 +40,7 @@ public class Hotel {
 
         Iterator<Map.Entry<Integer, Floor>> itr = floors.entrySet().iterator();
 
-        while(itr.hasNext())
-        {
+        while (itr.hasNext()) {
             Map.Entry<Integer, Floor> entry = itr.next();
             entry.getValue().print();
         }

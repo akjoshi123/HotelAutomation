@@ -50,8 +50,7 @@ public class Floor {
     private void printCorridor(HashMap<Integer, Corridor> corridor) {
         Iterator<Map.Entry<Integer, Corridor>> itr = corridor.entrySet().iterator();
 
-        while(itr.hasNext())
-        {
+        while (itr.hasNext()) {
             Map.Entry<Integer, Corridor> entry = itr.next();
             entry.getValue().print();
         }

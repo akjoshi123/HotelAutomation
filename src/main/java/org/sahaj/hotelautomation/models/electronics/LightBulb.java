@@ -4,7 +4,7 @@ import org.sahaj.hotelautomation.constants.Constants;
 
 import java.util.Date;
 
-public class LightBulb extends ElectronicEquipment{
+public class LightBulb extends ElectronicEquipment {
 
     private Date lastOnTime;
 

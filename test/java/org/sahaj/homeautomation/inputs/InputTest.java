@@ -22,7 +22,7 @@ public class InputTest {
     private static StringBuilder builder = new StringBuilder();
     private static InputStream customStream;
 
-    static  {
+    static {
         builder.append("1");
         builder.append(System.lineSeparator());
 

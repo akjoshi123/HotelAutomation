@@ -25,7 +25,7 @@ public abstract class Corridor {
     }
 
     public Corridor(CorridorType type) {
-        lightBulb = new LightBulb( powerConsumedLight);
+        lightBulb = new LightBulb(powerConsumedLight);
 
         airConditioner = new AirConditioner(powerConsumedAc);
 

@@ -46,24 +46,22 @@ public class RestoreCron {
                 long diff = currentTime.getTime() - lastTime.getTime();
                 long diffMinutes = diff / (60 * 1000) % 60;
 
-                if(diffMinutes >= Constants.lightOnIntervalMinutes) {
+                if (diffMinutes >= Constants.lightOnIntervalMinutes) {
                     hasChanged = true;
 
                     corridor.getLight().turnOff();
-                    if(corridorAlternate != null)
+                    if (corridorAlternate != null)
                         corridorAlternate.getAirConditioner().turnOn();
 
                     itr.remove();
                 }
             }
 
-            if(hasChanged)
+            if (hasChanged)
                 hotel.print();
 
         }, 0, CRON_INTERVAL, TimeUnit.SECONDS);
     }
-
-
 
 
 }

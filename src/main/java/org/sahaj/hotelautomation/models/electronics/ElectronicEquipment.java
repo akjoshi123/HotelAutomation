@@ -7,13 +7,13 @@ public abstract class ElectronicEquipment {
 
     public void turnOn() {
 
-        if(!onStatus)
+        if (!onStatus)
             onStatus = true;
     }
 
     public void turnOff() {
 
-        if(onStatus)
+        if (onStatus)
             onStatus = false;
     }
 

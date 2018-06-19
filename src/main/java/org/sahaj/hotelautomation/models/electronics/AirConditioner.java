@@ -2,7 +2,7 @@ package org.sahaj.hotelautomation.models.electronics;
 
 import org.sahaj.hotelautomation.constants.Constants;
 
-public class AirConditioner extends ElectronicEquipment{
+public class AirConditioner extends ElectronicEquipment {
 
     public AirConditioner(int powerConsumed) {
 

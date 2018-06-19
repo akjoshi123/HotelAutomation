@@ -54,7 +54,6 @@ public class HotelBuilderTest {
     }
 
 
-
     @Test
     public void addMainAndSubCorridorTest() {
         int mainCorridor = 1;

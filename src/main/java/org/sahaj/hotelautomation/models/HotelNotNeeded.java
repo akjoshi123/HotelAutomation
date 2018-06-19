@@ -13,7 +13,7 @@ public class HotelNotNeeded {
 
         HashMap<Integer, Floor> floorObjects = new HashMap<Integer, Floor>();
 
-        for(int i = 1;i <= floors; i++) {
+        for (int i = 1; i <= floors; i++) {
             floorObjects.put(i, new Floor(i));
         }
 
@@ -41,8 +41,7 @@ public class HotelNotNeeded {
 
         Iterator<Map.Entry<Integer, Floor>> itr = floors.entrySet().iterator();
 
-        while(itr.hasNext())
-        {
+        while (itr.hasNext()) {
             Map.Entry<Integer, Floor> entry = itr.next();
             entry.getValue().print();
         }

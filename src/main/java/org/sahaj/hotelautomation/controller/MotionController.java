@@ -3,14 +3,12 @@ package org.sahaj.hotelautomation.controller;
 import org.sahaj.hotelautomation.models.Motion;
 
 
-
 public class MotionController {
 
     private Motion motion;
     private PowerController powerController;
 
     /**
-     *
      * @param motion
      * @param powerController
      */

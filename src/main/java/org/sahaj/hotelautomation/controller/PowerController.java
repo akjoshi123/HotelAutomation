@@ -54,9 +54,9 @@ public class PowerController implements Observer {
 
         PowerLimits limit = new PowerConsumptionLimits();
 
-        if(!light.getStatus()) {
+        if (!light.getStatus()) {
 
-            if(!limit.isWithinLimit(floor)) {
+            if (!limit.isWithinLimit(floor)) {
                 Corridor alternateSubCorridor = PowerUtils.findRandomCorridor(subCorridor, floor.getSubCorridors(), motion.getSubCorridorNumber());
                 alternateSubCorridor.getAirConditioner().turnOff();
                 corridorMapping.put(subCorridor, alternateSubCorridor);
