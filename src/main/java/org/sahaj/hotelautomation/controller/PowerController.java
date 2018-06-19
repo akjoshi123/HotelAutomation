@@ -9,18 +9,27 @@ import org.sahaj.hotelautomation.models.Floor;
 import org.sahaj.hotelautomation.models.Motion;
 import org.sahaj.hotelautomation.utils.PowerUtils;
 
-import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 public class PowerController implements Observer {
 
     private Hotel hotel;
-    private HashMap<Corridor, Corridor> corridorMapping;
+    private HashMap<Corridor, List<Corridor>> corridorMapping;
+    private List<Corridor> singleAC;
+
+    public List<Corridor> getSingleAC() {
+        return singleAC;
+    }
+
+    public void setSingleAC(List<Corridor> singleAC) {
+        this.singleAC = singleAC;
+    }
 
     public PowerController(Hotel hotel) {
         this.hotel = hotel;
-        this.corridorMapping = new HashMap<Corridor, Corridor>();
+        this.corridorMapping = new HashMap<Corridor, List<Corridor>>();
+        this.singleAC = new ArrayList<Corridor>();
+
     }
 
     public Hotel getHotel() {
@@ -31,11 +40,11 @@ public class PowerController implements Observer {
         this.hotel = hotel;
     }
 
-    public HashMap<Corridor, Corridor> getCorridorMapping() {
+    public HashMap<Corridor, List<Corridor>> getCorridorMapping() {
         return corridorMapping;
     }
 
-    public void setCorridorMapping(HashMap<Corridor, Corridor> corridorMapping) {
+    public void setCorridorMapping(HashMap<Corridor, List<Corridor>> corridorMapping) {
         this.corridorMapping = corridorMapping;
     }
 
@@ -59,9 +68,21 @@ public class PowerController implements Observer {
             if (!limit.isWithinLimit(floor)) {
                 Corridor alternateSubCorridor = PowerUtils.findRandomCorridor(subCorridor, floor.getSubCorridors(), motion.getSubCorridorNumber());
                 alternateSubCorridor.getAirConditioner().turnOff();
-                corridorMapping.put(subCorridor, alternateSubCorridor);
+
+                Integer alterSubCorridorNumber = alternateSubCorridor.getCorridorNumber();
+
+                if (!corridorMapping.containsKey(alterSubCorridorNumber)) {
+                    List<Corridor> subcorridors = new ArrayList<Corridor>();
+                    subcorridors.add(subCorridor);
+
+                    corridorMapping.put(alternateSubCorridor, subcorridors);
+                    singleAC.add(alternateSubCorridor);
+                }
             } else {
-                corridorMapping.put(subCorridor, null);
+                Corridor singleSubcorridor = singleAC.get(0);
+                corridorMapping.get(singleSubcorridor).add(subCorridor);
+
+                singleAC.remove(0);
             }
         }
 

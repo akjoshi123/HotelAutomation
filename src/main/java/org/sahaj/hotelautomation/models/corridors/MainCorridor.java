@@ -4,9 +4,6 @@ import org.sahaj.hotelautomation.constants.CorridorType;
 
 public class MainCorridor extends Corridor {
 
-    private int corridorNumber;
-
-
     public MainCorridor(int corridorNumber) {
         super(CorridorType.Main);
         this.corridorNumber = corridorNumber;

@@ -8,6 +8,15 @@ import org.sahaj.hotelautomation.models.electronics.LightBulb;
 public abstract class Corridor {
 
     protected CorridorType type;
+    protected int corridorNumber;
+
+    public int getCorridorNumber() {
+        return corridorNumber;
+    }
+
+    public void setCorridorNumber(int corridorNumber) {
+        this.corridorNumber = corridorNumber;
+    }
 
     protected LightBulb lightBulb;
     protected AirConditioner airConditioner;

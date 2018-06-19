@@ -7,6 +7,7 @@ import org.sahaj.hotelautomation.models.corridors.Corridor;
 
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -32,28 +33,37 @@ public class RestoreCron {
 
         scheduledExecutorService.scheduleAtFixedRate(() -> {
 
-            Iterator<Map.Entry<Corridor, Corridor>> itr = this.powerController.getCorridorMapping().entrySet().iterator();
+            Iterator<Map.Entry<Corridor, List<Corridor>>> itr = this.powerController.getCorridorMapping().entrySet().iterator();
+
             boolean hasChanged = false;
             while (itr.hasNext()) {
-                Map.Entry<Corridor, Corridor> entry = itr.next();
+                Map.Entry<Corridor, List<Corridor>> entry = itr.next();
 
-                Corridor corridor = entry.getKey();
-                Corridor corridorAlternate = entry.getValue();
+                Corridor corridorAlternate = entry.getKey();
+                List<Corridor> corridors = entry.getValue();
+
+                for (Iterator<Corridor> iterator = corridors.iterator(); iterator.hasNext();) {
+                    Corridor corridor = iterator.next();
+                    Date lastTime = corridor.getLight().getLastOnTime();
+                    Date currentTime = new Date();
+                    long diff = currentTime.getTime() - lastTime.getTime();
+                    long diffMinutes = diff / (60 * 1000) % 60;
+
+                    if (diffMinutes >= Constants.lightOnIntervalMinutes) {
+                        hasChanged = true;
+
+                        corridor.getLight().turnOff();
 
 
-                Date lastTime = corridor.getLight().getLastOnTime();
-                Date currentTime = new Date();
-                long diff = currentTime.getTime() - lastTime.getTime();
-                long diffMinutes = diff / (60 * 1000) % 60;
+                        if (corridors.size() > 1) {
+                            iterator.remove();
+                        } else {
+                            corridorAlternate.getAirConditioner().turnOn();
+                            itr.remove();
 
-                if (diffMinutes >= Constants.lightOnIntervalMinutes) {
-                    hasChanged = true;
+                        }
 
-                    corridor.getLight().turnOff();
-                    if (corridorAlternate != null)
-                        corridorAlternate.getAirConditioner().turnOn();
-
-                    itr.remove();
+                    }
                 }
             }
 

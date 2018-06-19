@@ -78,6 +78,9 @@ public class HotelAutomationDriver {
 
     private boolean validInput(MotionInput motionInput) {
 
+        if (motionInput.getFloor() <= 0 || motionInput.getSubCorridor() <= 0)
+            return false;
+
         if (hotel.getFloors().size() < motionInput.getFloor())
             return false;
 
