@@ -3,8 +3,8 @@ package org.sahaj.hotelautomation.crons;
 import org.sahaj.hotelautomation.builder.Hotel;
 import org.sahaj.hotelautomation.constants.Constants;
 import org.sahaj.hotelautomation.controller.PowerController;
-import org.sahaj.hotelautomation.limitations.PowerConsumptionLimits;
-import org.sahaj.hotelautomation.limitations.PowerLimits;
+import org.sahaj.hotelautomation.limitations.PowerConsumptionLimitsCriteria;
+import org.sahaj.hotelautomation.limitations.PowerLimitsCriteria;
 import org.sahaj.hotelautomation.models.Floor;
 import org.sahaj.hotelautomation.models.corridors.Corridor;
 import org.sahaj.hotelautomation.utils.PowerUtils;
@@ -68,8 +68,8 @@ public class RestoreCron {
 
                     corridor.getLight().turnOff();
 
-                    PowerLimits powerLimits = PowerConsumptionLimits.getInstance();
-                    if (powerLimits.canACBeTurnedON(floor)) {
+                    PowerLimitsCriteria powerLimitsCriteria = PowerConsumptionLimitsCriteria.getInstance();
+                    if (powerLimitsCriteria.canACBeTurnedON(floor)) {
                         PowerUtils.turnONRandomAC(floor.getSubCorridors());
                     }
                     itr.remove();

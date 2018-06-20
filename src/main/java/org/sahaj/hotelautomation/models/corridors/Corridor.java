@@ -5,6 +5,12 @@ import org.sahaj.hotelautomation.constants.CorridorType;
 import org.sahaj.hotelautomation.models.electronics.AirConditioner;
 import org.sahaj.hotelautomation.models.electronics.LightBulb;
 
+/**
+ * Abstract class Corridor which is extended by Main corridor and Sub corridor.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public abstract class Corridor {
 
     protected CorridorType type;
@@ -42,6 +48,11 @@ public abstract class Corridor {
 
     }
 
+    /**
+     * Returns the power consumed by the current corridor.
+     *
+     * @return
+     */
     public int getPowerConsumed() {
 
         AirConditioner airConditioner = this.getAirConditioner();

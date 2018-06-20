@@ -1,8 +1,8 @@
 package org.sahaj.hotelautomation.controller;
 
 import org.sahaj.hotelautomation.builder.Hotel;
-import org.sahaj.hotelautomation.limitations.PowerConsumptionLimits;
-import org.sahaj.hotelautomation.limitations.PowerLimits;
+import org.sahaj.hotelautomation.limitations.PowerConsumptionLimitsCriteria;
+import org.sahaj.hotelautomation.limitations.PowerLimitsCriteria;
 import org.sahaj.hotelautomation.models.corridors.Corridor;
 import org.sahaj.hotelautomation.models.electronics.LightBulb;
 import org.sahaj.hotelautomation.models.Floor;
@@ -64,7 +64,7 @@ public class PowerController implements Observer {
         Corridor subCorridor = floor.getSubCorridors().get(motion.getSubCorridorNumber());
         LightBulb light = subCorridor.getLight();
 
-        PowerLimits limit = PowerConsumptionLimits.getInstance();
+        PowerLimitsCriteria limit = PowerConsumptionLimitsCriteria.getInstance();
 
         if (!light.getStatus()) {
 
@@ -77,6 +77,9 @@ public class PowerController implements Observer {
         }
 
         subCorridor.getLight().turnOn();
+
+        //If motion is detected in same sub corridor within 1 minute of previous motion, then we update the timestamp
+        //to extend the light ON interval by another 1 minute.
         light.setLastOnTime(System.currentTimeMillis());
 
         hotel.print();

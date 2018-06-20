@@ -12,17 +12,23 @@ import java.util.HashMap;
  * @author akjoshi on 19/06/18
  * @project HotelAutomation
  */
-public class PowerConsumptionLimits implements PowerLimits {
+public class PowerConsumptionLimitsCriteria implements PowerLimitsCriteria {
 
-    private static PowerConsumptionLimits powerConsumptionLimits;
+    private static PowerConsumptionLimitsCriteria powerConsumptionLimits;
 
-    public static PowerConsumptionLimits getInstance() {
+    public static PowerConsumptionLimitsCriteria getInstance() {
         if (powerConsumptionLimits == null) {
-            powerConsumptionLimits = new PowerConsumptionLimits();
+            powerConsumptionLimits = new PowerConsumptionLimitsCriteria();
         }
         return powerConsumptionLimits;
     }
 
+    /**
+     * Returns the max power consumption allowed per floor.
+     *
+     * @param floor
+     * @return
+     */
     @Override
     public int getPowerAllowedPerFloor(Floor floor) {
         int mainCorridorSize = floor.getMainCorridors().size();
@@ -31,6 +37,12 @@ public class PowerConsumptionLimits implements PowerLimits {
         return mainCorridorSize * Constants.powerConsumptionAllowedMaincorridor + subCorridorSize * Constants.powerConsumptionAllowedSubcorridor;
     }
 
+    /**
+     * Checks if power consumption is within limits if a light bulb is turned ON.
+     *
+     * @param floor
+     * @return
+     */
     @Override
     public boolean isWithinLimit(Floor floor) {
 
@@ -44,6 +56,12 @@ public class PowerConsumptionLimits implements PowerLimits {
         return (mainCorridorPowerConsumption + subCorridorPowerConsumption + Constants.powerConsumptionLight) <= getPowerAllowedPerFloor(floor);
     }
 
+    /**
+     * Returns a sub corridor whose AC can be tuned ON.
+     *
+     * @param floor
+     * @return
+     */
     @Override
     public boolean canACBeTurnedON(Floor floor) {
         HashMap<Integer, Corridor> mainCorridors = floor.getMainCorridors();

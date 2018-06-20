@@ -27,6 +27,7 @@ public class Input {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     /**
+     * Gets the initial input containing hotel details from input stream.
      *
      * @return
      */
@@ -49,6 +50,12 @@ public class Input {
         return input;
     }
 
+    /**
+     * Gets the motion input details from input stream.
+     *
+     * @param hotel
+     * @return
+     */
     public static MotionInput getMotionInput(Hotel hotel) {
 
         System.out.println(MOTION_INPUT_FLOOR);
@@ -75,7 +82,12 @@ public class Input {
         return SCANNER.nextInt();
     }
 
-
+    /**
+     * Validates the hotel details entered by user.
+     *
+     * @param hotelState
+     * @return
+     */
     private static boolean validInitialInput(InitialInput hotelState) {
         int floorCount = hotelState.getFloor();
         int mainCorridorsPerFloor = hotelState.getMainCorridorCount();
@@ -87,6 +99,13 @@ public class Input {
         return true;
     }
 
+    /**
+     *  Validates the motion input details entered by user.
+     *
+     * @param motionInput
+     * @param hotel
+     * @return
+     */
     private static boolean validInput(MotionInput motionInput, Hotel hotel) {
 
         if (motionInput.getFloor() <= 0 || motionInput.getSubCorridor() <= 0)

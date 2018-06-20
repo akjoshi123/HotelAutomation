@@ -4,6 +4,12 @@ import org.sahaj.hotelautomation.constants.Constants;
 
 import java.util.Date;
 
+/**
+ * Extends the ElectronicEquipment class to implement LightBulb.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class LightBulb extends ElectronicEquipment {
 
     private Date lastOnTime;

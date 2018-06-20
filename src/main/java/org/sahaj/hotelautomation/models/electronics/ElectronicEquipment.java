@@ -1,5 +1,11 @@
 package org.sahaj.hotelautomation.models.electronics;
 
+/**
+ * Abstract class ElectronicEquipments which is extended by Light bulb and Air conditioner.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public abstract class ElectronicEquipment {
 
     protected boolean onStatus = true;
