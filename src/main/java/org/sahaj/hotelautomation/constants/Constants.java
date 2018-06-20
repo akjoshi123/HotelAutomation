@@ -33,4 +33,18 @@ public class Constants {
     // Interval in minutes till when the light bulb is active after the motion is detected.
     public static int lightOnIntervalMinutes = 1;
 
+
+
+    public static final String FLOOR_COUNT_STRING = "Number of floors: ";
+    public static final String MAIN_CORRIDOR_COUNT_STRING = "Main corridors per floor: ";
+    public static final String SUB_CORRIDOR_COUNT_STRING = "Sub corridors per floor: ";
+
+    public static final String INVALID_INPUT = "Invalid input: ";
+
+    public static final String MOTION_INPUT_FLOOR = "Enter floor at where there is motion: ";
+    public static final String MOTION_INPUT_SUBCORRIDOR = "Enter sub corridor at where there is motion: ";
+
+    // Type exit to kill the application
+    public static final String EXIT = "exit";
+
 }

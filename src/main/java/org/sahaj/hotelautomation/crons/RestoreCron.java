@@ -76,8 +76,10 @@ public class RestoreCron {
                 }
             }
 
-            if (hasChanged)
+            if (hasChanged) {
                 hotel.print();
+                System.out.println(Constants.MOTION_INPUT_FLOOR);
+            }
 
         }, 0, CRON_INTERVAL, TimeUnit.SECONDS);
     }

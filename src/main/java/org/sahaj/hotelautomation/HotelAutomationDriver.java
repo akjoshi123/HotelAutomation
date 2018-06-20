@@ -14,7 +14,8 @@ import org.sahaj.hotelautomation.models.inputs.MotionInput;
  * 1) Accepts user inputs for hotel details and motion details.
  * 2) Triggers the restore cron once hotel details are entered.
  * 3) Publishes motion event which will be consumed by PowerController.
- *
+ * 4) Type 'exit' to kill the application.
+ * 
  * @author akjoshi on 19/06/18
  * @project HotelAutomation
  */
