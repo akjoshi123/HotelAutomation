@@ -1,8 +1,13 @@
 package org.sahaj.hotelautomation.models;
 
 import java.util.Observable;
-import java.util.Observer;
 
+/**
+ * Motion entity which uses Observer pattern to send update of movement to PowerController.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class Motion extends Observable {
 
     private int floorNumber;
@@ -28,6 +33,11 @@ public class Motion extends Observable {
         this.floorNumber = floorNumber;
     }
 
+    /**
+     * Will generate motion update event which will be consumed by PowerController.
+     *
+     * @param object
+     */
     @Override
     public void notifyObservers(Object object) {
         setChanged();

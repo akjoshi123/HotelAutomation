@@ -14,6 +14,12 @@ import org.sahaj.hotelautomation.models.Motion;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
+/**
+ * Junit testing of MotionController class.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MotionControllerTest {
 
@@ -38,6 +44,9 @@ public class MotionControllerTest {
         motionController = null;
     }
 
+    /**
+     * Checks if the light bulb is turned only for the mentioned sub corridor and not the order sub corridor.
+     */
     @Test
     public void publishMotionEventTest() {
         int motionFloor = 1;

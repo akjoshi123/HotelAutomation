@@ -9,6 +9,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * Hotel entity which stores all the data related to hotel.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class Hotel {
 
     private String hotelName;
@@ -36,17 +42,25 @@ public class Hotel {
         this.hotelName = builder.hotelName;
     }
 
+    /**
+     * Will print the Hotel entity.
+     */
     public void print() {
 
         Iterator<Map.Entry<Integer, Floor>> itr = floors.entrySet().iterator();
 
-        while(itr.hasNext())
-        {
+        while (itr.hasNext()) {
             Map.Entry<Integer, Floor> entry = itr.next();
             entry.getValue().print();
         }
     }
 
+    /**
+     * Hotel builder to build a Hotel instance with details provided by user.
+     *
+     * @author akjoshi on 19/06/18
+     * @project HotelAutomation
+     */
     public static class HotelBuilder {
 
         private String hotelName;
@@ -58,7 +72,12 @@ public class Hotel {
             floors = new HashMap<Integer, Floor>();
         }
 
-
+        /**
+         * Adds floors to the Hotel entity
+         *
+         * @param floorCount
+         * @return
+         */
         public HotelBuilder addFloor(int floorCount) {
 
             for (int count = 1; count <= floorCount; count++) {
@@ -72,6 +91,12 @@ public class Hotel {
             return this;
         }
 
+        /**
+         * Adds mainCorridors to each of floor
+         *
+         * @param mainCorridors
+         * @return
+         */
         public HotelBuilder addMainCorridor(int mainCorridors) {
             int floorCount = floors.size();
 
@@ -86,6 +111,12 @@ public class Hotel {
             return this;
         }
 
+        /**
+         * Adds subCorridors to each of floor
+         *
+         * @param subCorridors
+         * @return
+         */
         public HotelBuilder addSubCorridor(int subCorridors) {
             int floorCount = floors.size();
 
@@ -100,7 +131,11 @@ public class Hotel {
             return this;
         }
 
-
+        /**
+         * Build the Hotel instance and returns the object
+         *
+         * @return
+         */
         public Hotel build() {
             return new Hotel(this);
         }

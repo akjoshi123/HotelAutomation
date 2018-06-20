@@ -1,5 +1,11 @@
 package org.sahaj.hotelautomation.models.inputs;
 
+/**
+ * Entity to store motion details.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class MotionInput {
 
     private int floor, subCorridor;

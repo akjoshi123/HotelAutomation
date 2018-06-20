@@ -9,6 +9,16 @@ import org.sahaj.hotelautomation.models.inputs.InitialInput;
 import org.sahaj.hotelautomation.models.Motion;
 import org.sahaj.hotelautomation.models.inputs.MotionInput;
 
+/**
+ * Entry point to this application.
+ * 1) Accepts user inputs for hotel details and motion details.
+ * 2) Triggers the restore cron once hotel details are entered.
+ * 3) Publishes motion event which will be consumed by PowerController.
+ * 4) Type 'exit' to kill the application.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class HotelAutomationDriver {
 
     private Hotel hotel = null;
@@ -27,31 +37,30 @@ public class HotelAutomationDriver {
         try {
             InitialInput hotelState = Input.getInitialInput();
 
-            int floorCount = hotelState.getFloor();
-            int mainCorridorsPerFloor = hotelState.getMainCorridorCount();
-            int subCorridorsPerFloor = hotelState.getSubCorridorCount();
-
-            if (!validInitialInput(hotelState)) {
+            if (hotelState == null) {
                 System.err.println("Initial Input i.e. count of Floor , Maincorridor and Subcorridor must be atleast 1.");
                 return;
             }
+
+            int floorCount = hotelState.getFloor();
+            int mainCorridorsPerFloor = hotelState.getMainCorridorCount();
+            int subCorridorsPerFloor = hotelState.getSubCorridorCount();
 
             hotel = new Hotel.HotelBuilder("Westin").addFloor(floorCount).addMainCorridor(mainCorridorsPerFloor).addSubCorridor(subCorridorsPerFloor).build();
             hotel.print();
 
             powerController = new PowerController(hotel);
             MotionController motionController = new MotionController(motion, powerController);
-
             RestoreCron rc = new RestoreCron(powerController, hotel);
 
             while (true) {
-                MotionInput motionInput = Input.getMotionInput();
+                MotionInput motionInput = Input.getMotionInput(hotel);
 
-
-                if (!validInput(motionInput)) {
+                if (motionInput == null) {
                     System.err.println("Input floor/subcorridor is not in expected range");
                     continue;
                 }
+
                 int floorNumber = motionInput.getFloor();
                 int corridor = motionInput.getSubCorridor();
                 motion.setFloorNumber(floorNumber);
@@ -63,28 +72,6 @@ public class HotelAutomationDriver {
             ex.getStackTrace();
             System.out.println(ex.getMessage());
         }
-    }
-
-    private boolean validInitialInput(InitialInput hotelState) {
-        int floorCount = hotelState.getFloor();
-        int mainCorridorsPerFloor = hotelState.getMainCorridorCount();
-        int subCorridorsPerFloor = hotelState.getSubCorridorCount();
-
-        if (floorCount <= 0 || mainCorridorsPerFloor <= 0 || subCorridorsPerFloor <= 0)
-            return false;
-
-        return true;
-    }
-
-    private boolean validInput(MotionInput motionInput) {
-
-        if (hotel.getFloors().size() < motionInput.getFloor())
-            return false;
-
-        if (hotel.getFloors().get(1).getSubCorridors().size() < motionInput.getSubCorridor())
-            return false;
-
-        return true;
     }
 
 }

@@ -2,10 +2,13 @@ package org.sahaj.hotelautomation.models.corridors;
 
 import org.sahaj.hotelautomation.constants.CorridorType;
 
+/**
+ * Extends the Corridor class to implement MainCorridor.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class MainCorridor extends Corridor {
-
-    private int corridorNumber;
-
 
     public MainCorridor(int corridorNumber) {
         super(CorridorType.Main);
@@ -13,11 +16,15 @@ public class MainCorridor extends Corridor {
     }
 
 
+    /**
+     * Just prints the status of Light and AC for current main corridor
+     *
+     */
     public void print() {
-        System.out.println("Main Corridor " + corridorNumber);
+        System.out.print("Main Corridor " + corridorNumber + " ");
 
-        this.getAirConditioner().print();
         this.getLight().print();
+        this.getAirConditioner().print();
 
         System.out.println();
 

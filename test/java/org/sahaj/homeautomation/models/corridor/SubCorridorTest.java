@@ -9,6 +9,12 @@ import org.sahaj.hotelautomation.models.corridors.SubCorridor;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Junit testing of  SubCorridor class.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class SubCorridorTest {
 
     private Corridor corridor;
@@ -19,13 +25,18 @@ public class SubCorridorTest {
         corridor = new SubCorridor(subCorridorNumber);
     }
 
+    /**
+     * Check if power consumed is set correctly.
+     */
     @Test
     public void getPowerConsumedTest() {
 
         assertEquals(corridor.getPowerConsumed(), 10);
     }
 
-
+    /**
+     * Check if power consumed is set correctly with AC turned as OFF.
+     */
     @Test
     public void withACPowerConsumedTest() {
 

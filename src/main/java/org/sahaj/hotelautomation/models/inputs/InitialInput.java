@@ -1,5 +1,11 @@
 package org.sahaj.hotelautomation.models.inputs;
 
+/**
+ * Entity to store initial input i.e. Hotel details.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class InitialInput {
     private int floor, mainCorridorCount, subCorridorCount;
 

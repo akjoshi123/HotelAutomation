@@ -3,14 +3,18 @@ package org.sahaj.hotelautomation.controller;
 import org.sahaj.hotelautomation.models.Motion;
 
 
-
+/**
+ * Manages the motion events by registering Power Controller as a observer.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class MotionController {
 
     private Motion motion;
     private PowerController powerController;
 
     /**
-     *
      * @param motion
      * @param powerController
      */

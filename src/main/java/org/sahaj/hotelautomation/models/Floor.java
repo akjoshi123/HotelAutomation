@@ -4,6 +4,12 @@ import org.sahaj.hotelautomation.models.corridors.Corridor;
 
 import java.util.*;
 
+/**
+ * Floor entity which stores the relation between floor and its corridors.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class Floor {
 
     private int floorNumber;
@@ -50,15 +56,20 @@ public class Floor {
     private void printCorridor(HashMap<Integer, Corridor> corridor) {
         Iterator<Map.Entry<Integer, Corridor>> itr = corridor.entrySet().iterator();
 
-        while(itr.hasNext())
-        {
+        while (itr.hasNext()) {
             Map.Entry<Integer, Corridor> entry = itr.next();
             entry.getValue().print();
         }
     }
 
+    /**
+     * Just prints all the details of Floor.
+     *
+     */
     public void print() {
-        System.out.println("Floor " + floorNumber);
+        String space = String.format("%"+ 20 +"s", " ");
+        System.out.printf(space + "Floor " + floorNumber);
+        System.out.println();
 
         printCorridor(mainCorridors);
 
