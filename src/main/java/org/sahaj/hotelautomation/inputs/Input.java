@@ -1,10 +1,18 @@
 package org.sahaj.hotelautomation.inputs;
 
+import org.sahaj.hotelautomation.builder.Hotel;
 import org.sahaj.hotelautomation.models.inputs.InitialInput;
 import org.sahaj.hotelautomation.models.inputs.MotionInput;
 
 import java.util.Scanner;
 
+/**
+ * Accepts the user input which is hotel details and motion details.
+ * Will perform validations on the input as well.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class Input {
 
     private static final String FLOOR_COUNT_STRING = "Number of floors: ";
@@ -18,6 +26,10 @@ public class Input {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
+    /**
+     *
+     * @return
+     */
     public static InitialInput getInitialInput() {
 
         System.out.println(FLOOR_COUNT_STRING);
@@ -30,10 +42,14 @@ public class Input {
 
         InitialInput input = new InitialInput(floorCount, mainCorridorCount, subCorridorCount);
 
+        if(!validInitialInput(input)) {
+            return null;
+        }
+
         return input;
     }
 
-    public static MotionInput getMotionInput() {
+    public static MotionInput getMotionInput(Hotel hotel) {
 
         System.out.println(MOTION_INPUT_FLOOR);
 
@@ -43,6 +59,10 @@ public class Input {
         int subCorridorNumber = getNextInt();
 
         MotionInput motionInput = new MotionInput(floorNumber, subCorridorNumber);
+
+        if(!validInput(motionInput, hotel)) {
+            return null;
+        }
         return motionInput;
     }
 
@@ -53,5 +73,31 @@ public class Input {
         }
 
         return SCANNER.nextInt();
+    }
+
+
+    private static boolean validInitialInput(InitialInput hotelState) {
+        int floorCount = hotelState.getFloor();
+        int mainCorridorsPerFloor = hotelState.getMainCorridorCount();
+        int subCorridorsPerFloor = hotelState.getSubCorridorCount();
+
+        if (floorCount <= 0 || mainCorridorsPerFloor <= 0 || subCorridorsPerFloor <= 0)
+            return false;
+
+        return true;
+    }
+
+    private static boolean validInput(MotionInput motionInput, Hotel hotel) {
+
+        if (motionInput.getFloor() <= 0 || motionInput.getSubCorridor() <= 0)
+            return false;
+
+        if (hotel.getFloors().size() < motionInput.getFloor())
+            return false;
+
+        if (hotel.getFloors().get(1).getSubCorridors().size() < motionInput.getSubCorridor())
+            return false;
+
+        return true;
     }
 }

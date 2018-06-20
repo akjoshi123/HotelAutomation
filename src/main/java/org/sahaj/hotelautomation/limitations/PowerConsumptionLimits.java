@@ -6,6 +6,12 @@ import org.sahaj.hotelautomation.models.Floor;
 
 import java.util.HashMap;
 
+/**
+ * Implements the Power Limits interface
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class PowerConsumptionLimits implements PowerLimits {
 
 

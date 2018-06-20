@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.sahaj.hotelautomation.builder.Hotel;
 import org.sahaj.hotelautomation.inputs.Input;
 import org.sahaj.hotelautomation.models.inputs.InitialInput;
 import org.sahaj.hotelautomation.models.inputs.MotionInput;
@@ -19,8 +20,17 @@ import static junit.framework.TestCase.assertEquals;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class InputTest {
 
+    private static Hotel hotel;
+    private static int floorCount = 12;
+    private static int mainCorridorCount = 2;
+    private static int subCorridorCount = 23;
     private static StringBuilder builder = new StringBuilder();
     private static InputStream customStream;
+
+    @Before
+    public void initialize() {
+        hotel = new Hotel.HotelBuilder("Westin").addFloor(floorCount).addMainCorridor(mainCorridorCount).addSubCorridor(subCorridorCount).build();
+    }
 
     static {
         builder.append("1");
@@ -63,7 +73,7 @@ public class InputTest {
 
     @Test
     public void motionInputTest() {
-        MotionInput motionInput = Input.getMotionInput();
+        MotionInput motionInput = Input.getMotionInput(hotel);
 
 
         assertEquals(11, motionInput.getFloor());

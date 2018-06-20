@@ -13,6 +13,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Cron which will revert all the changes done when light bulb was turned ON.
+ * This cron will be triggered every 5 seconds to check if a light bulb of
+ * sub corridor is ON for more than a minute.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class RestoreCron {
 
     private static ScheduledExecutorService scheduledExecutorService = Executors
@@ -29,6 +37,11 @@ public class RestoreCron {
         runJob();
     }
 
+    /**
+     * This is a executor will turns ON the AC for the Light Bulb which is ON for more than a minute.
+     * In current configuration, turning of a AC OFF will allow for 2 light bulbs to turn ON, so the cron
+     * will make sure that while reverting the AC will be turned ON only when both the light bulbs are OFF.
+     */
     private void runJob() {
 
         scheduledExecutorService.scheduleAtFixedRate(() -> {

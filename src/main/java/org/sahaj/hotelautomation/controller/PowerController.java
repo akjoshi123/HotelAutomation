@@ -11,6 +11,14 @@ import org.sahaj.hotelautomation.utils.PowerUtils;
 
 import java.util.*;
 
+/**
+ * Observes the motion change event and toggles the status of AC and Light bulb accordingly.
+ * Also keeps track of relation between AC which was switched OFF for a Light bulb to turn on.
+ * Heart of the application.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class PowerController implements Observer {
 
     private Hotel hotel;
@@ -54,6 +62,12 @@ public class PowerController implements Observer {
         checkAndToggleLight(motion);
     }
 
+    /**
+     * Toggles the AC to OFF state if the power consumption is going beyond the maximum allowed.
+     * Keeps track of the activity, this data is then used by restore cron to revert all the changes.
+     *
+     * @param motion
+     */
     private void checkAndToggleLight(Motion motion) {
 
         Floor floor = hotel.getFloors().get(motion.getFloorNumber());

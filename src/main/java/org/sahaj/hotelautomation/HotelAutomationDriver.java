@@ -27,14 +27,14 @@ public class HotelAutomationDriver {
         try {
             InitialInput hotelState = Input.getInitialInput();
 
-            int floorCount = hotelState.getFloor();
-            int mainCorridorsPerFloor = hotelState.getMainCorridorCount();
-            int subCorridorsPerFloor = hotelState.getSubCorridorCount();
-
-            if (!validInitialInput(hotelState)) {
+            if (hotelState == null) {
                 System.err.println("Initial Input i.e. count of Floor , Maincorridor and Subcorridor must be atleast 1.");
                 return;
             }
+
+            int floorCount = hotelState.getFloor();
+            int mainCorridorsPerFloor = hotelState.getMainCorridorCount();
+            int subCorridorsPerFloor = hotelState.getSubCorridorCount();
 
             hotel = new Hotel.HotelBuilder("Westin").addFloor(floorCount).addMainCorridor(mainCorridorsPerFloor).addSubCorridor(subCorridorsPerFloor).build();
             hotel.print();
@@ -45,13 +45,13 @@ public class HotelAutomationDriver {
             RestoreCron rc = new RestoreCron(powerController, hotel);
 
             while (true) {
-                MotionInput motionInput = Input.getMotionInput();
+                MotionInput motionInput = Input.getMotionInput(hotel);
 
-
-                if (!validInput(motionInput)) {
+                if (motionInput == null) {
                     System.err.println("Input floor/subcorridor is not in expected range");
                     continue;
                 }
+
                 int floorNumber = motionInput.getFloor();
                 int corridor = motionInput.getSubCorridor();
                 motion.setFloorNumber(floorNumber);
@@ -63,31 +63,6 @@ public class HotelAutomationDriver {
             ex.getStackTrace();
             System.out.println(ex.getMessage());
         }
-    }
-
-    private boolean validInitialInput(InitialInput hotelState) {
-        int floorCount = hotelState.getFloor();
-        int mainCorridorsPerFloor = hotelState.getMainCorridorCount();
-        int subCorridorsPerFloor = hotelState.getSubCorridorCount();
-
-        if (floorCount <= 0 || mainCorridorsPerFloor <= 0 || subCorridorsPerFloor <= 0)
-            return false;
-
-        return true;
-    }
-
-    private boolean validInput(MotionInput motionInput) {
-
-        if (motionInput.getFloor() <= 0 || motionInput.getSubCorridor() <= 0)
-            return false;
-
-        if (hotel.getFloors().size() < motionInput.getFloor())
-            return false;
-
-        if (hotel.getFloors().get(1).getSubCorridors().size() < motionInput.getSubCorridor())
-            return false;
-
-        return true;
     }
 
 }
