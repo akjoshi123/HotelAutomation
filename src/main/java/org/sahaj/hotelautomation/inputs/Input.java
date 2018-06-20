@@ -71,7 +71,9 @@ public class Input {
 
             if(line.equals(Constants.EXIT))
                 System.exit(1);
-            System.err.println(Constants.INVALID_INPUT);
+
+            if(!line.isEmpty())
+                System.err.println(Constants.INVALID_INPUT);
 
 
 
