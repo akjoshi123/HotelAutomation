@@ -3,11 +3,14 @@ package org.sahaj.hotelautomation.crons;
 import org.sahaj.hotelautomation.builder.Hotel;
 import org.sahaj.hotelautomation.constants.Constants;
 import org.sahaj.hotelautomation.controller.PowerController;
+import org.sahaj.hotelautomation.limitations.PowerConsumptionLimits;
+import org.sahaj.hotelautomation.limitations.PowerLimits;
+import org.sahaj.hotelautomation.models.Floor;
 import org.sahaj.hotelautomation.models.corridors.Corridor;
+import org.sahaj.hotelautomation.utils.PowerUtils;
 
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -46,37 +49,30 @@ public class RestoreCron {
 
         scheduledExecutorService.scheduleAtFixedRate(() -> {
 
-            Iterator<Map.Entry<Corridor, List<Corridor>>> itr = this.powerController.getCorridorMapping().entrySet().iterator();
+            Iterator<Map.Entry<Corridor, Floor>> itr = this.powerController.getLightOnCorridors().entrySet().iterator();
 
             boolean hasChanged = false;
             while (itr.hasNext()) {
-                Map.Entry<Corridor, List<Corridor>> entry = itr.next();
+                Map.Entry<Corridor, Floor> entry = itr.next();
 
-                Corridor corridorAlternate = entry.getKey();
-                List<Corridor> corridors = entry.getValue();
+                Corridor corridor = entry.getKey();
+                Floor floor = entry.getValue();
 
-                for (Iterator<Corridor> iterator = corridors.iterator(); iterator.hasNext();) {
-                    Corridor corridor = iterator.next();
-                    Date lastTime = corridor.getLight().getLastOnTime();
-                    Date currentTime = new Date();
-                    long diff = currentTime.getTime() - lastTime.getTime();
-                    long diffMinutes = diff / (60 * 1000) % 60;
+                Date lastTime = corridor.getLight().getLastOnTime();
+                Date currentTime = new Date();
+                long diff = currentTime.getTime() - lastTime.getTime();
+                long diffMinutes = diff / (60 * 1000) % 60;
 
-                    if (diffMinutes >= Constants.lightOnIntervalMinutes) {
-                        hasChanged = true;
+                if (diffMinutes >= Constants.lightOnIntervalMinutes) {
+                    hasChanged = true;
 
-                        corridor.getLight().turnOff();
+                    corridor.getLight().turnOff();
 
-
-                        if (corridors.size() > 1) {
-                            iterator.remove();
-                        } else {
-                            corridorAlternate.getAirConditioner().turnOn();
-                            itr.remove();
-
-                        }
-
+                    PowerLimits powerLimits = PowerConsumptionLimits.getInstance();
+                    if (powerLimits.canACBeTurnedON(floor)) {
+                        PowerUtils.turnONRandomAC(floor.getSubCorridors());
                     }
+                    itr.remove();
                 }
             }
 

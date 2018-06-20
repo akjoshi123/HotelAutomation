@@ -22,22 +22,11 @@ import java.util.*;
 public class PowerController implements Observer {
 
     private Hotel hotel;
-    private HashMap<Corridor, List<Corridor>> corridorMapping;
-    private List<Corridor> singleAC;
-
-    public List<Corridor> getSingleAC() {
-        return singleAC;
-    }
-
-    public void setSingleAC(List<Corridor> singleAC) {
-        this.singleAC = singleAC;
-    }
+    private HashMap<Corridor, Floor> lightOnCorridors;
 
     public PowerController(Hotel hotel) {
         this.hotel = hotel;
-        this.corridorMapping = new HashMap<Corridor, List<Corridor>>();
-        this.singleAC = new ArrayList<Corridor>();
-
+        this.lightOnCorridors = new HashMap<Corridor, Floor>();
     }
 
     public Hotel getHotel() {
@@ -48,12 +37,12 @@ public class PowerController implements Observer {
         this.hotel = hotel;
     }
 
-    public HashMap<Corridor, List<Corridor>> getCorridorMapping() {
-        return corridorMapping;
+    public HashMap<Corridor, Floor> getLightOnCorridors() {
+        return lightOnCorridors;
     }
 
-    public void setCorridorMapping(HashMap<Corridor, List<Corridor>> corridorMapping) {
-        this.corridorMapping = corridorMapping;
+    public void setLightOnCorridors(HashMap<Corridor, Floor> lightOnCorridors) {
+        this.lightOnCorridors = lightOnCorridors;
     }
 
     @Override
@@ -75,7 +64,7 @@ public class PowerController implements Observer {
         Corridor subCorridor = floor.getSubCorridors().get(motion.getSubCorridorNumber());
         LightBulb light = subCorridor.getLight();
 
-        PowerLimits limit = new PowerConsumptionLimits();
+        PowerLimits limit = PowerConsumptionLimits.getInstance();
 
         if (!light.getStatus()) {
 
@@ -83,21 +72,8 @@ public class PowerController implements Observer {
                 Corridor alternateSubCorridor = PowerUtils.findRandomCorridor(subCorridor, floor.getSubCorridors(), motion.getSubCorridorNumber());
                 alternateSubCorridor.getAirConditioner().turnOff();
 
-                Integer alterSubCorridorNumber = alternateSubCorridor.getCorridorNumber();
-
-                if (!corridorMapping.containsKey(alterSubCorridorNumber)) {
-                    List<Corridor> subcorridors = new ArrayList<Corridor>();
-                    subcorridors.add(subCorridor);
-
-                    corridorMapping.put(alternateSubCorridor, subcorridors);
-                    singleAC.add(alternateSubCorridor);
-                }
-            } else {
-                Corridor singleSubcorridor = singleAC.get(0);
-                corridorMapping.get(singleSubcorridor).add(subCorridor);
-
-                singleAC.remove(0);
             }
+            lightOnCorridors.put(subCorridor, floor);
         }
 
         subCorridor.getLight().turnOn();

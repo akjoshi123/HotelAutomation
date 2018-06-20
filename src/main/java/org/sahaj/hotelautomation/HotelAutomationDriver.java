@@ -41,7 +41,6 @@ public class HotelAutomationDriver {
 
             powerController = new PowerController(hotel);
             MotionController motionController = new MotionController(motion, powerController);
-
             RestoreCron rc = new RestoreCron(powerController, hotel);
 
             while (true) {

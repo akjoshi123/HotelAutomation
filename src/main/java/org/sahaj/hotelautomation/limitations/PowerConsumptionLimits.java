@@ -14,6 +14,14 @@ import java.util.HashMap;
  */
 public class PowerConsumptionLimits implements PowerLimits {
 
+    private static PowerConsumptionLimits powerConsumptionLimits;
+
+    public static PowerConsumptionLimits getInstance() {
+        if (powerConsumptionLimits == null) {
+            powerConsumptionLimits = new PowerConsumptionLimits();
+        }
+        return powerConsumptionLimits;
+    }
 
     @Override
     public int getPowerAllowedPerFloor(Floor floor) {
@@ -34,5 +42,16 @@ public class PowerConsumptionLimits implements PowerLimits {
 
 
         return (mainCorridorPowerConsumption + subCorridorPowerConsumption + Constants.powerConsumptionLight) <= getPowerAllowedPerFloor(floor);
+    }
+
+    @Override
+    public boolean canACBeTurnedON(Floor floor) {
+        HashMap<Integer, Corridor> mainCorridors = floor.getMainCorridors();
+        HashMap<Integer, Corridor> subCorridors = floor.getSubCorridors();
+
+        int mainCorridorPowerConsumption = mainCorridors.entrySet().stream().mapToInt(x -> x.getValue().getPowerConsumed()).sum();
+        int subCorridorPowerConsumption = subCorridors.entrySet().stream().mapToInt(x -> x.getValue().getPowerConsumed()).sum();
+
+        return (mainCorridorPowerConsumption + subCorridorPowerConsumption + Constants.powerConsumptionAC <= getPowerAllowedPerFloor(floor));
     }
 }

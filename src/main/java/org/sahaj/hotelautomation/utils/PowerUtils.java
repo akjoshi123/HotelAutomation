@@ -1,5 +1,6 @@
 package org.sahaj.hotelautomation.utils;
 
+import org.sahaj.hotelautomation.models.Floor;
 import org.sahaj.hotelautomation.models.corridors.Corridor;
 
 import java.util.HashMap;
@@ -20,5 +21,11 @@ public class PowerUtils {
         }
 
         return matchingCorridor;
+    }
+
+    public static void turnONRandomAC(HashMap<Integer, Corridor> subCorridors) {
+        Optional<Map.Entry<Integer, Corridor>> randomSubCorridor = subCorridors.entrySet().stream().filter(subCorridor -> subCorridor.getValue().getAirConditioner().getStatus() == false).findFirst();
+
+        randomSubCorridor.get().getValue().getAirConditioner().turnOn();
     }
 }

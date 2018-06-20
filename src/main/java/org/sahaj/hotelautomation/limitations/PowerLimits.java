@@ -7,4 +7,6 @@ public interface PowerLimits {
     int getPowerAllowedPerFloor(Floor floor);
 
     boolean isWithinLimit(Floor floor);
+
+    boolean canACBeTurnedON(Floor floor);
 }
