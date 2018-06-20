@@ -57,7 +57,9 @@ public class Floor {
     }
 
     public void print() {
-        System.out.println("Floor " + floorNumber);
+        String space = String.format("%"+ 20 +"s", " ");
+        System.out.printf(space + "Floor " + floorNumber);
+        System.out.println();
 
         printCorridor(mainCorridors);
 

@@ -23,7 +23,7 @@ public class LightBulb extends ElectronicEquipment {
     }
 
     public void print() {
-        System.out.print("Light " + (this.onStatus ? Constants.onStatus : Constants.offStatus) + " ");
+        System.out.print("Light : " + (this.onStatus ? Constants.onStatus : Constants.offStatus) + " ");
     }
 
 }

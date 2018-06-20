@@ -13,7 +13,8 @@ public class Input {
 
     private static final String INVALID_INPUT = "Invalid input: ";
 
-    private static final String MOTION_INPUT = "Enter motion at floor and Sub corridor: ";
+    private static final String MOTION_INPUT_FLOOR = "Enter floor at where there is motion: ";
+    private static final String MOTION_INPUT_SUBCORRIDOR = "Enter sub corridor at where there is motion: ";
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -34,9 +35,11 @@ public class Input {
 
     public static MotionInput getMotionInput() {
 
-        System.out.println(MOTION_INPUT);
+        System.out.println(MOTION_INPUT_FLOOR);
 
         int floorNumber = getNextInt();
+        System.out.println(MOTION_INPUT_SUBCORRIDOR);
+
         int subCorridorNumber = getNextInt();
 
         MotionInput motionInput = new MotionInput(floorNumber, subCorridorNumber);

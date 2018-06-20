@@ -11,7 +11,7 @@ public class AirConditioner extends ElectronicEquipment {
     }
 
     public void print() {
-        System.out.print("AirConditioner " + (this.onStatus ? Constants.onStatus : Constants.offStatus) + " ");
+        System.out.print("AirConditioner : " + (this.onStatus ? Constants.onStatus : Constants.offStatus) + " ");
     }
 
 }
