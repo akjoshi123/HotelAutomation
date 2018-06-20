@@ -8,11 +8,14 @@ import org.sahaj.hotelautomation.models.Floor;
 import org.sahaj.hotelautomation.models.corridors.Corridor;
 import org.sahaj.hotelautomation.utils.PowerUtils;
 
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
+/**
+ * Junit testing of  PowerUtils class.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class PowerUtilsTest {
 
     private static Hotel hotel;
@@ -32,6 +35,9 @@ public class PowerUtilsTest {
         hotel = null;
     }
 
+    /**
+     * Checks if the corridor whose AC is to be turned OFF, is not null
+     */
     @Test
     public void findRandomCorridorTest() {
 

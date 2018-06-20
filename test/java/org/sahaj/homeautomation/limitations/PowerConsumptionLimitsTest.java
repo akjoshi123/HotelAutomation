@@ -13,6 +13,12 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
+/**
+ * Junit testing of PowerConsumptionLimit class.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class PowerConsumptionLimitsTest {
 
     private static Hotel hotel;
@@ -35,6 +41,9 @@ public class PowerConsumptionLimitsTest {
     }
 
 
+    /**
+     * Check is power consumption is calculated correctly.
+     */
     @Test
     public void floorPowerConsumptionTest() {
 
@@ -44,6 +53,9 @@ public class PowerConsumptionLimitsTest {
         assertEquals(60, powerLimitsCriteria.getPowerAllowedPerFloor(firstFloor));
     }
 
+    /**
+     * Check is power consumption is within limits.
+     */
     @Test
     public void withinLimitsTest() {
         int corridorNumber = 1;

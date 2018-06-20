@@ -9,6 +9,12 @@ import org.sahaj.hotelautomation.models.electronics.LightBulb;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
+/**
+ * Junit testing of LightBulb class.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class LightBulbTest {
 
     private LightBulb lightBulb;
@@ -18,6 +24,9 @@ public class LightBulbTest {
         lightBulb = new LightBulb(5);
     }
 
+    /**
+     * Check if Light Bulb is turned OFF and ON
+     */
     @Test
     public void onOffTest() {
 

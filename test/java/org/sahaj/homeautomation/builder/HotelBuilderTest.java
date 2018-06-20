@@ -9,6 +9,12 @@ import org.sahaj.hotelautomation.builder.Hotel;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
+/**
+ * Junit testing of HotelBuilder class.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class HotelBuilderTest {
 
     private Hotel.HotelBuilder hotelBuilder;
@@ -26,6 +32,9 @@ public class HotelBuilderTest {
     }
 
 
+    /**
+     * Checks if floor count is updated correctly.
+     */
     @Test
     public void addFloorTest() {
         int floorCount = 2;
@@ -35,6 +44,9 @@ public class HotelBuilderTest {
         assertEquals(floorCount, hotel.getFloors().size());
     }
 
+    /**
+     * Checks if main corridor count is updated correctly.
+     */
     @Test
     public void addMainCorridorTest() {
         int mainCorridor = 1;
@@ -44,6 +56,9 @@ public class HotelBuilderTest {
         assertEquals(mainCorridor, hotel.getFloors().get(1).getMainCorridors().size());
     }
 
+    /**
+     * Checks if sub corridor count is updated correctly.
+     */
     @Test
     public void addSubCorridorTest() {
         int subCorridor = 1;
@@ -54,6 +69,9 @@ public class HotelBuilderTest {
     }
 
 
+    /**
+     * Checks if main and sub corridor count is updated correctly.
+     */
     @Test
     public void addMainAndSubCorridorTest() {
         int mainCorridor = 1;
@@ -65,6 +83,9 @@ public class HotelBuilderTest {
         assertEquals(mainCorridor, hotel.getFloors().get(1).getMainCorridors().size());
     }
 
+    /**
+     * Checks if hotel object which is build is not null.
+     */
     @Test
     public void hotelBuilderTest() {
         Hotel hotel = hotelBuilder.build();
@@ -72,6 +93,9 @@ public class HotelBuilderTest {
         assertNotNull(hotel);
     }
 
+    /**
+     * Checks if hotel name is updated correctly.
+     */
     @Test
     public void hotelNameTest() {
         Hotel hotel = hotelBuilder.build();

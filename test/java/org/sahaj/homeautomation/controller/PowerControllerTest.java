@@ -8,10 +8,15 @@ import org.sahaj.hotelautomation.builder.Hotel;
 import org.sahaj.hotelautomation.controller.PowerController;
 import org.sahaj.hotelautomation.models.Motion;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Junit testing of PowerController class.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class PowerControllerTest {
 
     private static Hotel hotel;
@@ -31,8 +36,11 @@ public class PowerControllerTest {
         hotel = null;
     }
 
+    /**
+     * Checks when a motion is detected, a light bulb is switched ON and a AC is turned OFF since its exceeding power limits..
+     */
     @Test
-    public void checkAndToggleTest() {
+    public void checkIfACTurnedONTest() {
 
         int motionFloor = 1;
         int motionSubcorridor = 2;
@@ -46,6 +54,35 @@ public class PowerControllerTest {
         assertFalse(hotel.getFloors().get(motionFloor).getSubCorridors().get(1).getAirConditioner().getStatus());
     }
 
+    /**
+     * Checks when a motion is detected, a light bulb is switched ON and a AC is not turned OFF since its not exceeding power limits..
+     */
+    @Test
+    public void checkIfACNotTurnedONTest() {
+
+        int motionFloor = 1;
+        int motionSubcorridor = 2;
+        int anotherMotionSubcorridor = 1;
+
+        Motion motion = new Motion(motionFloor, motionSubcorridor);
+        PowerController powerController = new PowerController(hotel);
+
+        powerController.update(motion, null);
+
+        assertTrue(hotel.getFloors().get(motionFloor).getSubCorridors().get(motionSubcorridor).getLight().getStatus());
+        assertFalse(hotel.getFloors().get(motionFloor).getSubCorridors().get(1).getAirConditioner().getStatus());
+
+        motion.setSubCorridorNumber(anotherMotionSubcorridor);
+        powerController.update(motion, null);
+
+        assertTrue(hotel.getFloors().get(motionFloor).getSubCorridors().get(anotherMotionSubcorridor).getLight().getStatus());
+        assertTrue(hotel.getFloors().get(motionFloor).getSubCorridors().get(2).getAirConditioner().getStatus());
+        assertFalse(hotel.getFloors().get(motionFloor).getSubCorridors().get(1).getAirConditioner().getStatus());
+    }
+
+    /**
+     * For a single sub corridor, when a motion is detected, a light bulb is switched ON and a AC is turned OFF since its exceeding power limits.
+     */
     @Test
     public void singleSubcorridorTest() {
 

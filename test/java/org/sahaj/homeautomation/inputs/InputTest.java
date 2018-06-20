@@ -17,6 +17,12 @@ import java.io.UnsupportedEncodingException;
 
 import static junit.framework.TestCase.assertEquals;
 
+/**
+ * Junit testing of Input class.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class InputTest {
 
@@ -32,6 +38,7 @@ public class InputTest {
         hotel = new Hotel.HotelBuilder("Westin").addFloor(floorCount).addMainCorridor(mainCorridorCount).addSubCorridor(subCorridorCount).build();
     }
 
+    // A custom input stream for unit testing.
     static {
         builder.append("1");
         builder.append(System.lineSeparator());
@@ -61,6 +68,9 @@ public class InputTest {
     }
 
 
+    /**
+     * Checks if initial input is accepted correctly.
+     */
     @Test
     public void initialInputTest() {
         InitialInput input = Input.getInitialInput();
@@ -71,6 +81,9 @@ public class InputTest {
 
     }
 
+    /**
+     * Checks if motion input is accepted correctly.
+     */
     @Test
     public void motionInputTest() {
         MotionInput motionInput = Input.getMotionInput(hotel);

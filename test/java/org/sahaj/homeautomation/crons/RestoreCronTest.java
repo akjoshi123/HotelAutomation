@@ -16,6 +16,13 @@ import org.sahaj.hotelautomation.models.Motion;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Junit testing of RestoreCron class.
+ * In this test, a thread will sleep for a interval of time which is also light ON interval time.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RestoreCronTest {
 
@@ -49,6 +56,9 @@ public class RestoreCronTest {
         motionController = null;
     }
 
+    /**
+     * Checks the cron switched OFF the light bulb when it has been ON for more than its configured interval.
+     */
     @Test
     public void cronRunTest() {
         motionController.publishMotionEvent();

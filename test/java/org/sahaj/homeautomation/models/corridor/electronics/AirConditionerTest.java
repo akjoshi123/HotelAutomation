@@ -9,6 +9,12 @@ import org.sahaj.hotelautomation.models.electronics.AirConditioner;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
+/**
+ * Junit testing of AirConditioner class.
+ *
+ * @author akjoshi on 19/06/18
+ * @project HotelAutomation
+ */
 public class AirConditionerTest {
 
     private AirConditioner airConditioner;
@@ -18,6 +24,9 @@ public class AirConditionerTest {
         airConditioner = new AirConditioner(10);
     }
 
+    /**
+     * Check if AC is turned OFF and ON
+     */
     @Test
     public void onOffTest() {
 
